@@ -1,0 +1,87 @@
+<ion-content class="signup-page">
+  <!-- Logo Section -->
+  <div class="logo-container">
+    <img src="assets/logo.png" alt="SRHaven Logo" class="logo" />
+  </div>
+
+  <!-- Form Container -->
+  <div class="form-container">
+    <form (ngSubmit)="onSignup()" #signupForm="ngForm">
+      <!-- First Name Input -->
+      <ion-item>
+        <ion-label position="floating">First Name</ion-label>
+        <ion-input [(ngModel)]="firstName" 
+                   name="firstName" 
+                   type="text" 
+                   required 
+                   #firstNameRef="ngModel">
+        </ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="firstNameRef.invalid && firstNameRef.touched">
+        First name is required.
+      </ion-text>
+
+      <!-- Last Name Input -->
+      <ion-item>
+        <ion-label position="floating">Last Name</ion-label>
+        <ion-input [(ngModel)]="lastName" 
+                   name="lastName" 
+                   type="text" 
+                   required 
+                   #lastNameRef="ngModel">
+        </ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="lastNameRef.invalid && lastNameRef.touched">
+        Last name is required.
+      </ion-text>
+
+      <!-- Email Input -->
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input [(ngModel)]="email" 
+                   name="email" 
+                   type="email" 
+                   required 
+                   pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" 
+                   #emailRef="ngModel">
+        </ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="emailRef.invalid && emailRef.touched">
+        Please enter a valid email.
+      </ion-text>
+
+      <!-- Password Input -->
+      <ion-item>
+        <ion-label position="floating">Create Password</ion-label>
+        <ion-input [(ngModel)]="password" 
+                   name="password" 
+                   [type]="showPassword ? 'text' : 'password'" 
+                   required 
+                   pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" 
+                   #passwordRef="ngModel">
+        </ion-input>
+        <ion-icon slot="end" 
+                  [name]="showPassword ? 'eye-off' : 'eye'" 
+                  (click)="showPassword = !showPassword">
+        </ion-icon>
+      </ion-item>
+      <ion-text color="danger" *ngIf="passwordRef.invalid && passwordRef.touched">
+        Password must be at least 8 characters, contain letters, numbers, and a special character.
+      </ion-text>
+
+      <!-- Create Account Button -->
+      <ion-button class="signup-button" 
+                  expand="full" 
+                  type="submit" 
+                  [disabled]="!signupForm.valid">
+        Create Account
+      </ion-button>
+
+      <!-- Back to Login Link -->
+      <div class="back-to-login">
+        <span>Back to </span>
+        <a routerLink="/login">Login</a>
+      </div>
+    </form>
+  </div>
+</ion-content>

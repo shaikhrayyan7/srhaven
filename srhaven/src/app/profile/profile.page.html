@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- Logo in the header that redirects to the dashboard -->
+    <ion-buttons slot="start">
+      <ion-button (click)="goToDashboard()">
+        <img src="assets/logo.png" alt="Logo" style="height: 40px;" />
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Profile Content -->
+  <div class="profile-container">
+    <!-- User Details Form -->
+    <form (ngSubmit)="onUpdate()">
+      <p class="profile-heading">𝓨𝓸𝓾𝓻 𝓟𝓻𝓸𝓯𝓲𝓵𝓮, 𝓨𝓸𝓾𝓻 𝓟𝓪𝓼𝓼𝓹𝓸𝓻𝓽 𝓽𝓸 𝓜𝓮𝓶𝓸𝓻𝓲𝓮𝓼.</p>
+
+      <ion-item>
+        <ion-label position="floating">First Name</ion-label>
+        <ion-input [(ngModel)]="user.firstName" name="firstName" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Last Name</ion-label>
+        <ion-input [(ngModel)]="user.lastName" name="lastName" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input [(ngModel)]="user.email" name="email" type="email" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input [(ngModel)]="user.password" name="password" type="password" required></ion-input>
+      </ion-item>
+
+      <div class="buttons-container">
+        <ion-button type="submit" expand="full">Update</ion-button>
+        <ion-button expand="full" color="danger" (click)="onDeleteAccount()">Delete Account</ion-button>
+      </div>
+    </form>
+  </div>
+</ion-content>

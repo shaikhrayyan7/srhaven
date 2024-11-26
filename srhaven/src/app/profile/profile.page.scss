@@ -1,0 +1,83 @@
+ion-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    --background: url('/assets/profile.jpg') no-repeat center center / cover;
+  }
+  
+  /* Profile Page Styling */
+  .profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .logo {
+    margin-bottom: 30px;
+    cursor: pointer;
+  }
+  
+  .logo img {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .profile-heading {
+    font-size: 2rem; /* Default font size for larger screens */
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Styling for the form */
+  ion-item {
+    margin-bottom: 20px;
+  }
+  
+  ion-button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+  }
+  
+  /* Responsiveness for smaller screens */
+  @media (max-width: 768px) {
+    .profile-container {
+      padding: 10px;
+    }
+  
+    .logo img {
+      width: 100px;
+      height: 100px;
+    }
+  
+    .profile-heading {
+      font-size: 1.5rem; /* Slightly smaller text on tablet-sized screens */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .profile-container {
+      padding: 5px;
+    }
+  
+    .logo img {
+      width: 80px;
+      height: 80px;
+    }
+  
+    .profile-heading {
+      font-size: 1.2rem; /* Smaller text for very small screens (phones) */
+    }
+  }
+  

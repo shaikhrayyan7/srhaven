@@ -1,0 +1,55 @@
+ion-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    --background: url('/assets/about.jpg') no-repeat center center / cover;
+    padding: 20px;
+  }
+  
+  .about-container {
+    text-align: center;
+    font-size: 1rem;
+    max-width: 800px; /* Limit text width for readability */
+  }
+  
+  .about-container h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333; /* Make the title bold and clear */
+  }
+  
+  .about-container p {
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #555; /* Slightly lighter text color */
+  }
+  
+  .about-container h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 20px;
+    color: #333;
+  }
+  
+  .about-container p:last-child {
+    margin-bottom: 0;
+    font-size: 0.9rem;
+    color: #777;
+  }
+  
+  ion-button {
+    margin-top: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .about-container h2 {
+      font-size: 1.5rem;
+    }
+  
+    .about-container p {
+      font-size: 0.9rem;
+    }
+  }
+  

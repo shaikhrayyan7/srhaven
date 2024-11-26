@@ -1,0 +1,126 @@
+/* Restrict Background to Main Content */
+ion-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    --background: url('/assets/dashboard1.jpg') no-repeat center center / cover;
+  }
+  
+  /* Styling for the Header Section */
+  .dashboard-header {
+    text-align: center;
+    margin-top: 40px;
+  
+    h1 {
+      font-size: 3rem;
+      color: #100000 !important; /* Ensure text is visible */
+      margin-bottom: 10px;
+    }
+  
+    p {
+      font-size: 1.2rem;
+      color: #090000 !important; /* Ensure text is visible */
+    }
+  }
+  
+  /* Memory Container - Center the Button */
+  .memory-container {
+    display: flex;
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    flex-grow: 1; /* Push content to the center */
+    width: 100%; /* Take full width of the parent */
+  }
+  
+  /* Create Memory Button Styling */
+  #create-memory-button {
+    --background: #fb9208 !important; /* Orange button background */
+    --color: #fff !important; /* White button text */
+    font-size: 1rem;
+    padding: 12px 24px;
+    border-radius: 5px; /* Rounded button edges */
+    width: 250px; /* Fixed width for photo-like appearance */
+    height: 150px; /* Fixed height */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  
+    &:hover {
+      transform: scale(1.05); /* Slightly enlarge on hover */
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Enhance shadow on hover */
+    }
+  }
+  
+  /* Hamburger Icon Styling */
+  ion-button[slot="start"] {
+    --background: none; /* Remove background for menu button */
+    padding: 0; /* Adjust padding to fit icon */
+    width: auto; /* Ensure it does not inherit other button width styles */
+    height: auto; /* Prevent height styling from affecting this button */
+  }
+  
+  ion-icon {
+    font-size: 24px; /* Size of the hamburger icon */
+    color: #fcfcfc; /* Color of the icon */
+  }
+  
+  /* Sidebar Styling */
+  ion-menu {
+    --background: rgba(10, 0, 0, 0.9); /* Sidebar background */
+  }
+  
+  ion-menu-content {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+  
+  ion-item {
+    --background: transparent;
+    --color: #333;
+    font-size: 1rem;
+    padding: 10px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .dashboard-header {
+      h1 {
+        font-size: 2rem;
+      }
+  
+      p {
+        font-size: 1rem;
+      }
+    }
+  
+    #create-memory-button {
+      width: 200px; /* Adjust button width for medium screens */
+      height: 120px; /* Adjust height */
+      font-size: 0.9rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .dashboard-header {
+      h1 {
+        font-size: 1.5rem;
+      }
+  
+      p {
+        font-size: 0.9rem;
+      }
+    }
+  
+    #create-memory-button {
+      width: 150px; /* Adjust button width for small screens */
+      height: 100px; /* Adjust height */
+      font-size: 0.8rem;
+    }
+  }
+  

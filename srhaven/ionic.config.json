@@ -1,0 +1,7 @@
+{
+  "name": "srhaven",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

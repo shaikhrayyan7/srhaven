@@ -1,0 +1,55 @@
+/* Responsive Background */
+ion-content {
+  --background: url('/assets/home.jpg') no-repeat center center / cover;
+}
+
+/* Responsive Logo Section */
+.logo-container {
+  text-align: center;
+  margin: 10vh auto; /* Space from the top */
+}
+
+.logo {
+  height: 110px; /* Increase height */
+  width: auto; /* Maintain aspect ratio */
+  max-height: 20vh; /* Optional: Restrict maximum height for responsiveness */
+}
+
+/* Responsive Button Section */
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 5vh auto; /* Space from the logo */
+}
+
+.action-button {
+  margin: 10px 0;
+  width: 80%; /* Adjust width dynamically */
+  max-width: 400px; /* Limit button width for larger screens */
+  --background: rgba(251, 146, 8, 0.8); /* Semi-transparent orange */
+  --color: #fefefe;
+}
+
+.signup-button {
+  --background: rgba(251, 146, 8, 0.8); /* Custom color for Signup */
+}
+
+/* Media Queries for Extra Responsiveness */
+@media (min-width: 768px) {
+  .logo-container {
+    margin: 15vh auto; /* Push logo down slightly on larger screens */
+  }
+  .action-button {
+    width: 60%; /* Adjust button size for tablets */
+  }
+}
+
+@media (min-width: 1024px) {
+  .logo-container {
+    margin: 20vh auto; /* Adjust spacing for desktop */
+  }
+  .action-button {
+    width: 50%; /* Smaller button width for desktops */
+  }
+}

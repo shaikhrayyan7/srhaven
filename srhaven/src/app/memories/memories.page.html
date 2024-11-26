@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="navigateToDashboard()">
+        <img src="assets/logo.png" alt="Logo" style="height: 40px;" />
+      </ion-button>
+    </ion-buttons>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Section: Your Memories, Safely Stored -->
+  <div class="memories-header">
+    <h3>𝓨𝓸𝓾𝓻 𝓜𝓮𝓶𝓸𝓻𝓲𝓮𝓼, 𝓢𝓪𝓯𝓮𝓵𝔂 𝓢𝓽𝓸𝓻𝓮𝓭!</h3>
+  </div>
+
+  <!-- Section: User Pictures -->
+  <div class="memories-grid">
+    <!-- First Image Slot for Upload Button -->
+    <ion-button class="add-picture" (click)="uploadPicture()">
+      <ion-icon name="add-circle-outline" style="font-size: 50px;"></ion-icon>
+    </ion-button>
+
+    <!-- Example Placeholders for Images (Later, these will be fetched from the database) -->
+    <div class="memory-picture">
+      <img src="assets/placeholder.jpg" alt="Memory 1" />
+    </div>
+    <div class="memory-picture">
+      <img src="assets/placeholder.jpg" alt="Memory 2" />
+    </div>
+
+    <div class="memory-picture">
+      <img src="assets/placeholder.jpg" alt="Memory 3" />
+    </div>
+
+    <!-- Repeat the above structure to show more images -->
+  </div>
+</ion-content>
