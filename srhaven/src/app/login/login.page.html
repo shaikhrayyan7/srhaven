@@ -27,6 +27,11 @@
         </ion-input>
       </ion-item>
 
+      <!-- Error Message -->
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+
       <!-- Login Button -->
       <ion-button class="login-button" expand="full" type="submit">Login</ion-button>
 

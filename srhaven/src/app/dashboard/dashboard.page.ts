@@ -7,10 +7,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashboard.page.scss'],
 })
 export class DashboardPage {
-  // Variable to hold user's name
-  userName: string = 'John Doe'; // Replace with dynamic user data
-
   constructor(private router: Router) {}
+
+  ionViewWillEnter() {
+    // Simply show a welcome message without needing user data
+  }
 
   // Function to handle Create a Memory button click
   onCreateMemory() {

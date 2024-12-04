@@ -97,4 +97,10 @@ ion-item {
     .signup-text {
         font-size: 10px;
     }
+
+    .error-message {
+        color: black; /* Change text color to black */
+        font-size: 14px; /* Optional: Adjust the size for better readability */
+        margin-top: 10px; /* Optional: Add some spacing above the message */
+      }
 }
