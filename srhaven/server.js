@@ -7,22 +7,24 @@ const cors = require('cors');
 const app = express();
 
 // Middleware
-app.use(cors()); // Enable CORS for cross-origin requests
-app.use(bodyParser.json()); // Parse incoming JSON requests
+app.use(cors());
+app.use(bodyParser.json());
+
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost/srhaven', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-.then(() => {
-  console.log('MongoDB connected');
-})
-.catch((err) => {
-  console.error('Error connecting to MongoDB', err);
-});
+mongoose
+  .connect('mongodb://localhost/srhaven', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log('MongoDB connected');
+  })
+  .catch((err) => {
+    console.error('Error connecting to MongoDB', err);
+  });
 
-// Define the User schema with timestamps and disable version key (__v)
+// Define the User schema
 const userSchema = new mongoose.Schema(
   {
     firstName: String,
@@ -31,118 +33,119 @@ const userSchema = new mongoose.Schema(
     password: String,
   },
   {
-    timestamps: true,  // Automatically adds created_at and updated_at fields
-    versionKey: false  // Removes the default __v field from the schema
+    timestamps: true,
+    versionKey: false,
   }
 );
 
-// Remove __v from the response and define a transform function
+// Transform the schema for cleaner JSON response
 userSchema.set('toJSON', {
-  transform: (doc, ret, options) => {
-    // Delete the __v field before sending the response
-    delete ret.__v; 
+  transform: (doc, ret) => {
+    delete ret.__v;
+    delete ret.password; // Remove sensitive data
     return ret;
-  }
+  },
 });
 
 // Create the User model
 const User = mongoose.model('User', userSchema);
 
+// Route for signing up a new user
+app.post('/api/signup', async (req, res) => {
+  const { firstName, lastName, email, password } = req.body;
+
+  try {
+    // Check if the email already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ error: 'Email already in use' });
+    }
+
+    // Create a new user
+    const newUser = new User({ firstName, lastName, email, password });
+    await newUser.save();
+
+    // Respond with only a success message
+    res.status(201).json({ message: 'Signup successful' });
+  } catch (error) {
+    console.error('Error during signup:', error);
+    res.status(500).json({ error: 'Error creating user' });
+  }
+});
+
 // Route to validate user login
+const bcrypt = require('bcrypt'); // Import bcrypt for password comparison
 app.post('/api/login', async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // Find user by email
     const user = await User.findOne({ email });
-
-    // If user not found, send an error
     if (!user) {
+      console.log('User not found:', email);
       return res.status(404).json({ error: 'User not found' });
     }
 
-    // Check if password matches
-    if (user.password !== password) {
+    console.log('Stored password hash:', user.password);
+    console.log('Password entered:', password);
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    console.log('Password match result:', isMatch);
+
+    if (!isMatch) {
       return res.status(401).json({ error: 'Incorrect password' });
     }
 
-    // Omit the password field and sensitive data
-    const userData = user.toObject();
-    delete userData.password; // Remove the password field
-
-    // Respond with only the message, not user data
-    res.status(200).json({ 
-      message: 'Login successful', 
-      user: { 
-        firstName: user.firstName, 
-        lastName: user.lastName, 
-        email: user.email 
-      } 
-    });
-
+    res.status(200).json({ message: 'Login successful' });
   } catch (error) {
-    console.error(error);
+    console.error('Error in login process:', error);
     res.status(500).json({ error: 'Error logging in' });
   }
 });
-  
 
-// Route to create a new user (signup)
-// Route to validate user login
-app.post('/api/login', async (req, res) => {
-  const { email, password } = req.body;
+// Route to get the authenticated user's profile
+app.get('/api/users/:email', async (req, res) => {
+  const email = req.params.email;
 
   try {
-    // Find user by email
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
-
-    // Check if password matches
-    if (user.password !== password) {
-      return res.status(401).json({ error: 'Incorrect password' });
-    }
-
-    // Log the user data for debugging
-    console.log('Logged in user data:', user);
-
-    // Send the user data (firstName, lastName, email)
     res.status(200).json({
-      message: 'Login successful',
-      user: {
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-      },
-    });
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+    }); // Only send necessary details
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Error logging in' });
+    console.error('Error fetching user profile:', error);
+    res.status(500).json({ error: 'Failed to fetch user profile' });
   }
 });
 
-// Route to get all users
-app.get('/api/users', async (req, res) => {
-  try {
-    const users = await User.find();
-    res.status(200).json(users);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Error retrieving users' });
-  }
-});
-
-// Route to update a user's details by email
+// Route to update a user's details
 app.put('/api/users/:email', async (req, res) => {
-  const { firstName, lastName, password } = req.body;
-  const email = req.params.email; // Use email as a unique identifier
+  const email = req.params.email;
+  const { firstName, lastName, email: newEmail, password } = req.body;
 
   try {
-    // Find the user by email and update their information
+    // Prepare updated fields
+    const updates = {
+      firstName,
+      lastName,
+    };
+
+    if (newEmail) {
+      updates.email = newEmail; // Include email if provided
+    }
+
+    if (password) {
+      const hashedPassword = await bcrypt.hash(password, 10); // Hash password
+      updates.password = hashedPassword; // Include hashed password
+    }
+
     const updatedUser = await User.findOneAndUpdate(
-      { email }, // Search by email
-      { firstName, lastName, password }, // Fields to update
+      { email },
+      updates,
       { new: true } // Return the updated document
     );
 
@@ -150,12 +153,36 @@ app.put('/api/users/:email', async (req, res) => {
       return res.status(404).json({ error: 'User not found' });
     }
 
-    res.status(200).json({ message: 'User updated successfully', user: updatedUser });
+    res.status(200).json({
+      message: 'Profile updated successfully',
+      user: updatedUser,
+    });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Error updating user' });
+    console.error('Error updating profile:', error);
+    res.status(500).json({ error: 'Failed to update profile' });
   }
 });
+
+
+// DELETE user by email
+app.delete('/api/users/:email', async (req, res) => {
+  const email = req.params.email;
+
+  try {
+    // Find and delete the user by email
+    const deletedUser = await User.findOneAndDelete({ email });
+
+    if (!deletedUser) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.status(200).json({ message: 'User deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting user:', error);
+    res.status(500).json({ error: 'Failed to delete user. Please try again later.' });
+  }
+});
+
 
 // Start the server
 const PORT = 5000;
