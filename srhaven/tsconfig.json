@@ -9,6 +9,7 @@
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
@@ -33,6 +34,6 @@
     "strictInputAccessModifiers": true,
     "strictTemplates": true
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "src/google-maps.d.ts"],
   "exclude": ["node_modules"]
 }

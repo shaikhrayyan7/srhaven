@@ -15,6 +15,6 @@ import { JourneyPage } from './journey.page';
     IonicModule,
     JourneyPageRoutingModule
   ],
-  declarations: [JourneyPage]
+  declarations: [JourneyPage],
 })
 export class JourneyPageModule {}
