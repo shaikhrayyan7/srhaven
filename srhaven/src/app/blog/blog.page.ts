@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-blog',
@@ -12,7 +13,7 @@ export class BlogPage implements OnInit {
       blog: 'Blog 1',
       title: 'Everything You Need to Know About Visiting Cologne Cathedral',
       summary: 'Standing proudly on the banks of the...',
-      time: '2024-12-10', // ISO format for consistent date parsing
+      time: '2024-12-10',
       image: '/assets/blog1.JPG',
       url: 'https://auslanderblog.com/complete-cologne-cathedral-guide/',
     },
@@ -71,11 +72,14 @@ export class BlogPage implements OnInit {
       time: '2024-07-30',
       image: '/assets/blog8.JPG',
       url: 'https://www.creativelena.com/en/travel-blog/unesco-travel-germany-erfurt-weimar-wartburg/',
-    },
+    }
   ];
   filteredPosts = [...this.blogPosts];
 
-  constructor() {}
+  constructor(private translate: TranslateService) {
+    const savedLanguage = localStorage.getItem('appLanguage') || 'en';
+    this.translate.use(savedLanguage);
+  }
 
   ngOnInit() {}
 
@@ -85,7 +89,7 @@ export class BlogPage implements OnInit {
 
   filterPosts() {
     const query = this.searchQuery.toLowerCase();
-    this.filteredPosts = this.filteredPosts.filter(post =>
+    this.filteredPosts = this.blogPosts.filter(post =>
       post.title.toLowerCase().includes(query)
     );
   }
@@ -93,11 +97,10 @@ export class BlogPage implements OnInit {
   onSegmentChange(event: any) {
     const filter = event.detail.value;
     if (filter === 'recent') {
-      this.filteredPosts = this.getRecentPosts(3); // Show top 5 recent blogs
+      this.filteredPosts = this.getRecentPosts(3);
     } else {
-      this.filteredPosts = [...this.blogPosts]; // Show all blogs
+      this.filteredPosts = [...this.blogPosts];
     }
-    // Apply search filter after segment change
     if (this.searchQuery) {
       this.filterPosts();
     }
@@ -107,21 +110,17 @@ export class BlogPage implements OnInit {
     return this.blogPosts
       .map(post => ({
         ...post,
-        parsedDate: new Date(post.time).getTime(), // Parse date for sorting
+        parsedDate: new Date(post.time).getTime(),
       }))
-      .sort((a, b) => b.parsedDate - a.parsedDate) // Sort by descending date
-      .slice(0, limit) // Get the top N recent posts
-      .map(({ parsedDate, ...cleanPost }) => cleanPost); // Remove `parsedDate` before returning
+      .sort((a, b) => b.parsedDate - a.parsedDate)
+      .slice(0, limit)
+      .map(({ parsedDate, ...cleanPost }) => cleanPost);
   }
 
   readPost(title: string, blog: string, summary: string) {
     const speech = new SpeechSynthesisUtterance();
     speech.text = `${title}. ${blog}. ${summary}`;
-    speech.lang = 'en-US'; // Adjust language if needed
-    speech.rate = 1; // Adjust speed (0.1 to 10)
-    speech.pitch = 1; // Adjust pitch (0 to 2)
-
+    speech.lang = this.translate.currentLang === 'de' ? 'de-DE' : 'en-US';
     window.speechSynthesis.speak(speech);
   }
-
 }

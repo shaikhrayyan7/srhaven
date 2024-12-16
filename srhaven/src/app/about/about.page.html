@@ -1,41 +1,39 @@
 <ion-header>
   <ion-toolbar>
-    <!-- Back button that redirects to the previous page (e.g., dashboard) -->
+    <!-- Back button that redirects to the dashboard -->
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/dashboard"></ion-back-button> <!-- Default href will go to the dashboard -->
+      <ion-back-button defaultHref="/dashboard"></ion-back-button>
     </ion-buttons>
 
-    <!-- Title to help center the logo -->
+    <!-- Title with the centered logo -->
     <ion-title class="ion-text-center">
       <img src="assets/logo.png" alt="Logo" style="height: 40px;" />
     </ion-title>
-
-    <!-- No buttons on the right as the logo is centered -->
-    <ion-buttons slot="end">
-      <!-- You can remove this section if you don't need any buttons on the right -->
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="about-container">
-    <h2>About This App</h2>
+    <h2>{{ 'ABOUT.TITLE' | translate }}</h2>
     <p>
-      This app was developed by <b>Mohd Rayyan Shaikh</b> and <b>Ayesha Dhool</b> as part of the <b>Specialization Course: Developing Mobile Applications.</b> The project was completed under the guidance and supervision of <b>Professor Peter Dillinger.</b>
+      {{ 'ABOUT.DEVELOPERS_INFO' | translate }} 
+      <b>Mohd Rayyan Shaikh</b> & <b>Ayesha Ahmed Dhool</b>
+      {{ 'ABOUT.COURSE_INFO' | translate }}
+      <b>Professor Peter Dillinger</b>.
     </p>
     <p>
-      The app was developed between November - December 2024 as a part of our academic endeavor to create a user-friendly travel diary platform. It aims to help users track their travel experiences, document memories, and explore destinations with an interactive map interface.
+      {{ 'ABOUT.PROJECT_DESCRIPTION' | translate }}
     </p>
     <p>
-      We hope this app enhances your journey by allowing you to easily store and relive your travel memories, while providing a seamless experience to track your past adventures.
+      {{ 'ABOUT.USER_EXPERIENCE' | translate }}
     </p>
 
-    <h3>Copyright & Trademark</h3>
+    <h3>{{ 'ABOUT.COPYRIGHT_TITLE' | translate }}</h3>
     <p>
-      <b>© 2024 Mohd Rayyan Shaikh & Ayesha Dhool. All rights reserved.</b>
+      <b>{{ 'ABOUT.COPYRIGHT_INFO' | translate }}</b>
     </p>
     <p>
-      This app and its contents are the property of Mohd Rayyan Shaikh & Ayesha Dhool. Unauthorized reproduction or distribution of any part of this app is prohibited. All trademarks, service marks, and logos are the property of their respective owners.
+      {{ 'ABOUT.OWNERSHIP_INFO' | translate }}
     </p>
   </div>
 </ion-content>

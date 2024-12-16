@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { ApiService } from '../services/api.service'; // Import the ApiService
+import { ApiService } from '../services/api.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-signup',
@@ -18,22 +19,25 @@ export class SignupPage {
   constructor(
     private router: Router,
     private alertCtrl: AlertController,
-    private apiService: ApiService // Inject the ApiService
-  ) {}
+    private apiService: ApiService,
+    private translate: TranslateService
+  ) {
+    // Apply the stored language at page load
+    const savedLanguage = localStorage.getItem('appLanguage') || 'en';
+    this.translate.use(savedLanguage);
+  }
 
   async onSignup() {
-    // Check if all fields are filled
     if (!this.firstName || !this.lastName || !this.email || !this.password) {
       const alert = await this.alertCtrl.create({
-        header: 'Error',
-        message: 'All fields are required.',
+        header: this.translate.instant('SIGNUP.ERROR_HEADER'),
+        message: this.translate.instant('SIGNUP.ALL_FIELDS_REQUIRED'),
         buttons: ['OK'],
       });
       await alert.present();
       return;
     }
 
-    // Create the user object
     const newUser = {
       firstName: this.firstName,
       lastName: this.lastName,
@@ -41,30 +45,20 @@ export class SignupPage {
       password: this.password,
     };
 
-    // Call the API to save the user
     this.apiService.signupUser(newUser.firstName, newUser.lastName, newUser.email, newUser.password).subscribe(
-      async (response) => {
-        console.log('User created successfully:', response);
-
-        // Show success alert
+      async () => {
         const alert = await this.alertCtrl.create({
-          header: 'Success',
-          message: 'Your account has been created successfully!',
+          header: this.translate.instant('SIGNUP.SUCCESS_HEADER'),
+          message: this.translate.instant('SIGNUP.SUCCESS_MESSAGE'),
           buttons: ['OK'],
         });
         await alert.present();
-
-        // Redirect to the login page
         this.router.navigate(['/login']);
       },
       async (error) => {
-        console.error('Error creating user:', error);
-
-        // Show error alert
         const alert = await this.alertCtrl.create({
-          header: 'Error',
-          message:
-            error?.error?.message || 'There was an error creating your account.',
+          header: this.translate.instant('SIGNUP.ERROR_HEADER'),
+          message: error?.error?.message || this.translate.instant('SIGNUP.ERROR_MESSAGE'),
           buttons: ['OK'],
         });
         await alert.present();

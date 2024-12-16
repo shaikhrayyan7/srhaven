@@ -2,18 +2,31 @@
 .login-page {
     --background: url('/assets/login.jpg') no-repeat center center/cover;
     min-height: 100vh; /* Full viewport height */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Logo Section */
+/* Highlighted Logo Section */
 .logo-container {
     text-align: center;
-    margin-top: 50px;
-}
-
-.logo {
-    height: 120px;
-    width: auto;
-}
+    margin: 3vh auto; /* Space from the top */
+    position: relative;
+    padding: 20px; /* Add spacing around the logo */
+    background: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
+    border-radius: 12px; /* Rounded corners for a smooth look */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Shadow for emphasis */
+    z-index: 1; /* Ensure it is above the background */
+  }
+  
+/* Logo image styling */
+.logo-container .logo {
+    height: 110px; /* Adjust logo height */
+    width: auto; /* Maintain aspect ratio */
+    max-height: 20vh; /* Restrict maximum height for responsiveness */
+    z-index: 2; /* Ensure the logo stays above the container styling */
+  }
 
 /* Form Container */
 .form-container {
@@ -21,20 +34,23 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    max-width: 400px; /* Limit the width of the form */
+    width: 90%; /* Default width for smaller screens */
+    max-width: 400px; /* Maximum width for larger screens */
     margin: 0 auto; /* Center the form horizontally */
-    padding: 20px; /* Add some padding */
-    background: rgba(255, 255, 255, 0.8); /* Light background */
-    border-radius: 10px; /* Rounded corners */
-    min-height: 60%; /* Ensure the form container takes at least 60% of the screen height */
+    padding: 20px; /* Add padding for inner spacing */
+    background: rgba(255, 255, 255, 0.8); /* Light background for readability */
+    border-radius: 10px; /* Rounded corners for modern design */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    min-height: 60%; /* Minimum height to maintain proportion */
+    z-index: 1;
 }
 
 /* Input Styling */
 ion-item {
-    --background: rgba(10, 10, 10, 0.8);
+    --background: rgba(255, 255, 255, 0.7); /* Darker background for contrast */
     --border-radius: 8px;
     margin-bottom: 15px; /* Adjust margin between inputs */
+    width: 100%; /* Ensure inputs take full width of form */
 }
 
 /* Sign-up Text */
@@ -52,19 +68,39 @@ ion-item {
 
 /* Login Button */
 .login-button {
-    --background: rgba(251, 146, 8, 0.8);
+    --background: rgba(251, 146, 8, 0.8); /* Custom color for login button */
     --color: #fff;
-    width: 100%; /* Make button width 100% of the container */
+    width: 100%; /* Make button width 100% of the form container */
+    font-weight: bold; /* Enhance button text */
+}
+
+/* Error Message */
+.error-message {
+    color: red; /* Emphasize error messages */
+    font-size: 14px; /* Adjust the size for readability */
+    margin-top: 10px; /* Add spacing above the message */
 }
 
 /* Media Queries for Responsiveness */
+@media (min-width: 1024px) {
+    .form-container {
+        padding: 30px; /* Increase padding for desktops */
+        max-width: 500px; /* Wider form for larger screens */
+    }
+
+    .logo {
+        height: 140px; /* Larger logo for bigger screens */
+    }
+}
+
 @media (max-width: 768px) {
     .logo {
-        height: 100px;
+        height: 100px; /* Adjust logo size for tablets */
     }
 
     .form-container {
         margin: 20px;
+        padding: 20px;
     }
 
     ion-item {
@@ -83,24 +119,24 @@ ion-item {
 
 @media (max-width: 480px) {
     .logo {
-        height: 80px;
+        height: 80px; /* Smaller logo for mobile screens */
     }
 
     .login-button {
-        width: 90%;
+        width: 90%; /* Slightly reduce button width */
     }
 
     .form-container {
-        margin: 15px;
+        margin: 15px; /* Reduce outer margin */
+        padding: 15px; /* Compact padding */
     }
 
     .signup-text {
-        font-size: 10px;
+        font-size: 10px; /* Reduce text size for smaller screens */
     }
 
     .error-message {
         color: black; /* Change text color to black */
-        font-size: 14px; /* Optional: Adjust the size for better readability */
-        margin-top: 10px; /* Optional: Add some spacing above the message */
-      }
+        font-size: 12px; /* Slightly smaller for compact view */
+    }
 }

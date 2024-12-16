@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Camera, CameraResultType } from '@capacitor/camera';
 import { Geolocation } from '@capacitor/geolocation';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ToastController } from '@ionic/angular';
 
 @Component({
@@ -87,18 +87,28 @@ export class CreateMemoryPage {
 
     const memoryData = {
       image: this.capturedImage,
-      place: this.place,
-      date: this.date,
-      gpsCoordinates: this.gpsCoordinates,
+      place: this.place || 'Unknown Place',
+      date: this.date || new Date().toISOString(),
+      gpsCoordinates: this.gpsCoordinates || 'Unknown Coordinates',
       userEmail: this.userEmail,
     };
 
+    console.log('Memory Data to be sent:', memoryData); // Debug the payload
+
     try {
-      await this.http.post('http://localhost:5000/api/upload', memoryData).toPromise();
-      console.log('Memory saved successfully.');
+      const response = await this.http.post('http://localhost:5000/api/upload', memoryData, {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        }),
+      }).toPromise();
+      console.log('Memory saved successfully:', response);
+      await this.showToast('Memory saved successfully!');
       this.router.navigate(['/memories']);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error saving memory:', error);
+      if (error.status === 400) {
+        console.error('Server rejected the request. Check the payload structure.');
+      }
       await this.showToast('Failed to save memory. Please try again.');
     }
   }

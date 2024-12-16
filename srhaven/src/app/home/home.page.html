@@ -1,4 +1,12 @@
 <ion-content [fullscreen]="true">
+  <!-- Language Selector Styled -->
+  <div class="language-dropdown">
+    <ion-select placeholder="Select Language" interface="popover" (ionChange)="switchLanguage($event.detail.value)" class="language-select">
+      <ion-select-option value="en">English</ion-select-option>
+      <ion-select-option value="de">Deutsch</ion-select-option>
+    </ion-select>
+  </div>
+
   <!-- Responsive Logo Section -->
   <div class="logo-container">
     <img src="assets/logo.png" alt="SRHaven Logo" class="logo" />
@@ -6,7 +14,11 @@
 
   <!-- Responsive Buttons Section -->
   <div class="button-container">
-    <ion-button routerLink="/login" expand="block" class="action-button">Login</ion-button>
-    <ion-button routerLink="/signup" expand="block" class="action-button signup-button">Signup</ion-button>
+    <ion-button routerLink="/login" expand="block" class="action-button">
+      {{ 'HOME.LOGIN' | translate }}
+    </ion-button>
+    <ion-button routerLink="/signup" expand="block" class="action-button signup-button">
+      {{ 'HOME.SIGNUP' | translate }}
+    </ion-button>
   </div>
 </ion-content>

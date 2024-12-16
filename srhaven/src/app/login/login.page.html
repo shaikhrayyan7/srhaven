@@ -9,17 +9,16 @@
     <form (ngSubmit)="onLogin()">
       <!-- Email Input -->
       <ion-item>
-        <ion-label position="floating">Email</ion-label>
+        <ion-label position="floating">{{ 'LOGIN.EMAIL' | translate }}</ion-label>
         <ion-input [(ngModel)]="email" name="email" type="email" required></ion-input>
       </ion-item>
 
       <!-- Password Input -->
       <ion-item>
-        <ion-label position="floating">Password</ion-label>
+        <ion-label position="floating">{{ 'LOGIN.PASSWORD' | translate }}</ion-label>
         <ion-input [(ngModel)]="password" 
                    [type]="showPassword ? 'text' : 'password'" 
                    name="password" required>
-          <!-- Password visibility toggle -->
           <ion-icon slot="end" 
                     [name]="showPassword ? 'eye-off' : 'eye'" 
                     (click)="showPassword = !showPassword">
@@ -33,12 +32,14 @@
       </div>
 
       <!-- Login Button -->
-      <ion-button class="login-button" expand="full" type="submit">Login</ion-button>
+      <ion-button class="login-button" expand="full" type="submit">
+        {{ 'LOGIN.BUTTON' | translate }}
+      </ion-button>
 
       <!-- Sign-up Link -->
       <div class="signup-text">
-        <span>Don't have an account? </span>
-        <a routerLink="/signup">Sign-up</a>
+        <span>{{ 'LOGIN.NO_ACCOUNT' | translate }} </span>
+        <a routerLink="/signup">{{ 'LOGIN.SIGNUP' | translate }}</a>
       </div>
     </form>
   </div>

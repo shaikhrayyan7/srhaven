@@ -1,0 +1,94 @@
+{
+  "HOME": {
+    "LOGIN": "Login",
+    "SIGNUP": "Signup",
+    "WELCOME": "Welcome to SRHaven"
+  },
+  "LOGIN": {
+    "EMAIL": "Email",
+    "PASSWORD": "Password",
+    "BUTTON": "Login",
+    "NO_ACCOUNT": "Don't have an account?",
+    "SIGNUP": "Sign-up",
+    "ERROR_MESSAGE": "Login failed. Please try again."
+  },
+  "SIGNUP": {
+    "FIRST_NAME": "First Name",
+    "LAST_NAME": "Last Name",
+    "EMAIL": "Email",
+    "PASSWORD": "Create Password",
+    "CREATE_ACCOUNT": "Create Account",
+    "BACK_TO": "Back to",
+    "LOGIN": "Login",
+    "ERROR_HEADER": "Error",
+    "ALL_FIELDS_REQUIRED": "All fields are required.",
+    "SUCCESS_HEADER": "Success",
+    "SUCCESS_MESSAGE": "Your account has been created successfully!",
+    "ERROR_MESSAGE": "There was an error creating your account. Please try again."
+  },
+    "DASHBOARD": {
+      "MENU": "Menu",
+      "MEMORIES": "Memories Album",
+      "JOURNEY": "Journey Diary",
+      "PROFILE": "Profile",
+      "BLOG": "Blogs",
+      "LOGOUT": "Logout",
+      "ABOUT": "About the App",
+      "TITLE": "Dashboard",
+      "WELCOME": "Welcome back!",
+      "DESCRIPTION": "Let's create memories worth keeping",
+      "START_SPEECH": "Start Listening",
+      "CREATE_MEMORY": "Create a Memory",
+      "CAMERA_ERROR": "Error opening camera",
+      "WEBCAM_UNSUPPORTED": "Webcam is not supported in this browser",
+      "WELCOME_MESSAGE": "Welcome to the Dashboard!"
+    },
+    "MEMORIES": {
+      "TITLE": "Memories",
+      "HEADER": "𝓨𝓸𝓾𝓻 𝓜𝓮𝓶𝓸𝓻𝓲𝓮𝓼, 𝓢𝓪𝓯𝓮𝓵𝓎 𝓢𝓽𝓸𝓻𝓮𝓭!",
+      "ADD_IMAGE": "Add a New Memory",
+      "IMAGE_ALT": "Memory Image",
+      "CHOOSE_IMAGE": "Choose an Image",
+      "SELECT_FROM_GALLERY": "Select from Gallery",
+      "CANCEL": "Cancel",
+      "IMAGE_ERROR": "Error selecting image",
+      "UPLOAD_ERROR": "Error uploading image",
+      "FETCH_ERROR": "Error fetching memories"
+    },
+    "PROFILE": {
+      "HEADING": "𝓨𝓸𝓾𝓻 𝓟𝓻𝓸𝓯𝓲𝓵𝓮, 𝓨𝓸𝓾𝓻 𝓟𝓪𝓼𝓼𝓹𝓸𝓻𝓽 𝓽𝓸 𝓜𝓮𝓶𝓸𝓻𝓲𝓮𝓼.",
+      "FIRST_NAME": "First Name",
+      "LAST_NAME": "Last Name",
+      "EMAIL": "Email",
+      "NEW_PASSWORD": "Enter New Password",
+      "UPDATE_BUTTON": "Update",
+      "DELETE_BUTTON": "Delete Account",
+      "ALL_FIELDS_REQUIRED": "All fields are required.",
+      "UPDATE_SUCCESS": "Profile updated successfully!",
+      "UPDATE_ERROR": "Failed to update profile. Please try again.",
+      "CONFIRM_DELETE": "Are you sure you want to delete your account?",
+      "DELETE_SUCCESS": "Account deleted successfully!",
+      "DELETE_ERROR": "Failed to delete account. Please try again.",
+      "LOAD_ERROR": "Error loading profile.",
+      "CANCEL": "Cancel"
+    },
+    "ABOUT": {
+      "TITLE": "About This App",
+      "DEVELOPERS_INFO": "This app was developed by",
+      "AND": "&",
+      "COURSE_INFO": "as part of the Specialization Course: Developing Mobile Applications. The project was completed under the guidance and supervision of",
+      "PROJECT_DESCRIPTION": "The app was developed between November - December 2024 as a part of our academic endeavor to create a user-friendly travel diary platform. It aims to help users track their travel experiences, document memories, and explore destinations with an interactive map interface.",
+      "USER_EXPERIENCE": "We hope this app enhances your journey by allowing you to easily store and relive your travel memories, while providing a seamless experience to track your past adventures.",
+      "COPYRIGHT_TITLE": "Copyright & Trademark",
+      "COPYRIGHT_INFO": "© 2024 Mohd Rayyan Shaikh & Ayesha Ahmed Dhool. All rights reserved.",
+      "OWNERSHIP_INFO": "This app and its contents are the property of Mohd Rayyan Shaikh & Ayesha Ahmed Dhool. Unauthorized reproduction or distribution of any part of this app is prohibited. All trademarks, service marks, and logos are the property of their respective owners."
+    },
+    "BLOG": {
+      "TITLE": "Blog",
+      "SEARCH_PLACEHOLDER": "Search Blog Posts",
+      "ALL": "All",
+      "RECENT": "Recent",
+      "IMAGE_ALT": "Blog Image"
+    }
+  
+}

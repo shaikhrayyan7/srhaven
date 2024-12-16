@@ -1,129 +1,113 @@
 /* Restrict Background to Main Content */
 ion-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    --background: url('/assets/dashboard1.jpg') no-repeat center center / cover;
-  }
-  
-  /* Styling for the Header Section */
-  .dashboard-header {
-    text-align: center;
-    margin-top: 40px;
-  
-    h1 {
-      font-size: 3rem;
-      color: #100000 !important; /* Ensure text is visible */
-      margin-bottom: 10px;
-    }
-  
-    p {
-      font-size: 1.2rem;
-      color: #090000 !important; /* Ensure text is visible */
-    }
-  }
-  
-  /* Memory Container - Center the Button */
-  .memory-container {
-    display: flex;
-    align-items: center; /* Center vertically */
-    justify-content: center; /* Center horizontally */
-    flex-grow: 1; /* Push content to the center */
-    width: 100%; /* Take full width of the parent */
-  }
-  
-  /* Create Memory Button Styling */
-  #create-memory-button {
-    --background: #fb9208 !important; /* Orange button background */
-    --color: #fff !important; /* White button text */
-    font-size: 1rem;
-    padding: 12px 24px;
-    border-radius: 5px; /* Rounded button edges */
-    width: 250px; /* Fixed width for photo-like appearance */
-    height: 150px; /* Fixed height */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  
-    &:hover {
-      transform: scale(1.05); /* Slightly enlarge on hover */
-      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Enhance shadow on hover */
-    }
-  }
-  
-  /* Hamburger Icon Styling */
-  ion-button[slot="start"] {
-    --background: none; /* Remove background for menu button */
-    padding: 0; /* Adjust padding to fit icon */
-    width: auto; /* Ensure it does not inherit other button width styles */
-    height: auto; /* Prevent height styling from affecting this button */
-  }
-  
-  ion-icon {
-    font-size: 24px; /* Size of the hamburger icon */
-    color: #fcfcfc; /* Color of the icon */
-  }
-  
-  /* Sidebar Styling */
-  ion-menu {
-    --background: rgba(10, 0, 0, 0.9); /* Sidebar background */
-  }
-  
-  ion-menu-content {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-  }
-  
-  ion-item {
-    --background: transparent;
-    --color: #333;
-    font-size: 1rem;
-    padding: 10px;
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .dashboard-header {
-      h1 {
-        font-size: 2rem;
-      }
-  
-      p {
-        font-size: 1rem;
-      }
-    }
-  
-    #create-memory-button {
-      width: 200px; /* Adjust button width for medium screens */
-      height: 120px; /* Adjust height */
-      font-size: 0.9rem;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .dashboard-header {
-      h1 {
-        font-size: 1.5rem;
-      }
-  
-      p {
-        font-size: 0.9rem;
-      }
-    }
-  
-    #create-memory-button {
-      width: 150px; /* Adjust button width for small screens */
-      height: 100px; /* Adjust height */
-      font-size: 0.8rem;
-    }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  --background: url('/assets/dashboard1.jpg') no-repeat center center / cover;
+}
 
-    /* Button Container Styling */
+/* Styling for the Header Section */
+.dashboard-header {
+  text-align: center;
+  margin-top: 40px;
+
+  h1 {
+    font-size: 3rem;
+    color: #100000 !important; /* Ensure text is visible */
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 1.2rem;
+    color: #090000 !important; /* Ensure text is visible */
+  }
+}
+
+/* Memory Button Container - Centered */
+.memory-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px; /* Adjust spacing from header */
+}
+
+/* Centered Buttons Styling */
+.memory-container ion-button {
+  --background: #fb9208 !important; /* Orange background */
+  --color: #ffffff !important; /* White text */
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding: 12px 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    background-color: #e87e04 !important;
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* Speech Button Styling */
+.speech-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+#start-speech {
+  --background: #fb9208 !important;
+  --color: #ffffff !important;
+  font-size: 1.1rem;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+  &:hover {
+    background-color: #e87e04 !important;
+    transform: scale(1.1);
+  }
+}
+
+
+/* Hamburger Icon Styling */
+ion-button[slot="start"] {
+  --background: none; /* Remove background for menu button */
+  padding: 0; /* Adjust padding to fit icon */
+  width: auto;
+  height: auto;
+}
+
+ion-icon {
+  font-size: 24px; /* Size of the hamburger icon */
+  color: #fcfcfc; /* Color of the icon */
+}
+
+/* Sidebar Styling */
+ion-menu {
+  --background: rgba(10, 0, 0, 0.9); /* Sidebar background */
+}
+
+ion-menu-content {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+ion-item {
+  --background: transparent;
+  --color: #333;
+  font-size: 1rem;
+  padding: 10px;
+}
+
+/* Button Container Styling */
 .button-container {
   display: flex;
   justify-content: center;
@@ -134,21 +118,19 @@ ion-content {
 /* Capture Image Button Styling */
 #capture-image-button,
 #cancel-button {
-  --background: #fb9208 !important; /* Default blue background for buttons */
+  --background: #fb9208 !important; /* Orange background */
   --color: #fff !important; /* White button text */
   font-size: 0.9rem; /* Smaller font size */
-  padding: 8px 16px; /* Reduced padding */
+  padding: 8px 16px;
   border-radius: 6px; /* Rounded edges */
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15); /* Subtle shadow */
-  font-weight: bold; /* Bold text */
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
-}
+  font-weight: bold;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 
-/* Hover Effect for Both Buttons */
-#capture-image-button:hover,
-#cancel-button:hover {
-  transform: scale(1.05); /* Slight enlargement on hover */
-  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+  &:hover {
+    transform: scale(1.05); /* Slight enlargement on hover */
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+  }
 }
 
 /* Cancel Button Specific Styling */
@@ -157,15 +139,7 @@ ion-content {
   --color: #fff !important; /* White text */
 }
 
-/* Adjust for Smaller Screens */
-@media (max-width: 480px) {
-  #capture-image-button,
-  #cancel-button {
-    font-size: 0.8rem; /* Smaller font for small screens */
-    padding: 6px 12px; /* Compact padding */
-  }
-}
-
+/* Speech Button Styling */
 .speech-container {
   display: flex;
   justify-content: center;
@@ -173,13 +147,56 @@ ion-content {
 }
 
 .start-speech {
-  background-color: orange; /* Change the button's background to orange */
-  color: white; /* Ensure the icon color contrasts with the background */
+  background-color: #fb9208; /* Orange background for speech button */
+  color: white; /* White icon or text */
+  border-radius: 6px;
+  padding: 10px 20px;
+  font-weight: bold;
+
+  &:hover {
+    background-color: #e87e04; /* Darker orange on hover */
+  }
 }
 
-#start-speech:hover {
-  background-color: darkorange; /* Optional: Add a hover effect */
+/* Responsive Design */
+@media (max-width: 768px) {
+  .dashboard-header {
+    h1 {
+      font-size: 2rem; /* Reduce header font size */
+    }
+
+    p {
+      font-size: 1rem; /* Adjust paragraph size */
+    }
+  }
+
+  #create-memory-button {
+    width: 200px;
+    height: 120px;
+    font-size: 0.9rem;
+  }
 }
 
+@media (max-width: 480px) {
+  .dashboard-header {
+    h1 {
+      font-size: 1.5rem;
+    }
+
+    p {
+      font-size: 0.9rem;
+    }
+  }
+
+  #create-memory-button {
+    width: 150px; /* Adjust button size */
+    height: 100px;
+    font-size: 0.8rem;
+  }
+
+  #capture-image-button,
+  #cancel-button {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+  }
 }
-  

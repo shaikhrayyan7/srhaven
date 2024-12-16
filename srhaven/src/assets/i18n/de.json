@@ -1,0 +1,92 @@
+{
+  "HOME": {
+    "LOGIN": "Anmelden",
+    "SIGNUP": "Registrieren",
+    "WELCOME": "Willkommen bei SRHaven"
+  },
+  "LOGIN": {
+    "EMAIL": "E-Mail",
+    "PASSWORD": "Passwort",
+    "BUTTON": "Anmelden",
+    "NO_ACCOUNT": "Sie haben kein Konto?",
+    "SIGNUP": "Registrieren",
+    "ERROR_MESSAGE": "Anmeldung fehlgeschlagen. Bitte versuchen Sie es erneut."
+  },
+  "SIGNUP": {
+    "FIRST_NAME": "Vorname",
+    "LAST_NAME": "Nachname",
+    "EMAIL": "E-Mail",
+    "PASSWORD": "Passwort erstellen",
+    "CREATE_ACCOUNT": "Konto erstellen",
+    "BACK_TO": "Zurück zu",
+    "LOGIN": "Anmelden",
+    "ERROR_HEADER": "Fehler",
+    "ALL_FIELDS_REQUIRED": "Alle Felder sind erforderlich.",
+    "SUCCESS_HEADER": "Erfolg",
+    "SUCCESS_MESSAGE": "Ihr Konto wurde erfolgreich erstellt!",
+    "ERROR_MESSAGE": "Es gab einen Fehler bei der Kontoerstellung. Bitte versuchen Sie es erneut."
+  },
+  "DASHBOARD": {
+    "MENU": "Menü",
+    "MEMORIES": "Erinnerungsalbum",
+    "JOURNEY": "Reisetagebuch",
+    "PROFILE": "Profil",
+    "BLOG": "Blogs",
+    "ABOUT": "Über die App",
+    "TITLE": "Dashboard",
+    "WELCOME": "Willkommen zurück!",
+    "DESCRIPTION": "Lass uns Erinnerungen erstellen, die es wert sind, bewahrt zu werden",
+    "START_SPEECH": "Spracherkennung starten",
+    "CREATE_MEMORY": "Erinnerung erstellen",
+    "CAMERA_ERROR": "Fehler beim Öffnen der Kamera",
+    "WEBCAM_UNSUPPORTED": "Webcam wird in diesem Browser nicht unterstützt",
+    "WELCOME_MESSAGE": "Willkommen im Dashboard!"
+  },
+  "MEMORIES": {
+    "TITLE": "Erinnerungen",
+    "HEADER": "Ihre Erinnerungen, sicher gespeichert!",
+    "ADD_IMAGE": "Ein neues Andenken hinzufügen",
+    "IMAGE_ALT": "Erinnerungsbild",
+    "CHOOSE_IMAGE": "Wählen Sie ein Bild",
+    "SELECT_FROM_GALLERY": "Aus der Galerie auswählen",
+    "CANCEL": "Abbrechen",
+    "IMAGE_ERROR": "Fehler beim Auswählen des Bildes",
+    "UPLOAD_ERROR": "Fehler beim Hochladen des Bildes",
+    "FETCH_ERROR": "Fehler beim Abrufen der Erinnerungen"
+  },
+  "PROFILE": {
+    "HEADING": "Ihr Profil, Ihr Pass zu Erinnerungen.",
+    "FIRST_NAME": "Vorname",
+    "LAST_NAME": "Nachname",
+    "EMAIL": "E-Mail",
+    "NEW_PASSWORD": "Neues Passwort eingeben",
+    "UPDATE_BUTTON": "Aktualisieren",
+    "DELETE_BUTTON": "Konto löschen",
+    "ALL_FIELDS_REQUIRED": "Alle Felder sind erforderlich.",
+    "UPDATE_SUCCESS": "Profil erfolgreich aktualisiert!",
+    "UPDATE_ERROR": "Profil konnte nicht aktualisiert werden. Bitte versuchen Sie es erneut.",
+    "CONFIRM_DELETE": "Sind Sie sicher, dass Sie Ihr Konto löschen möchten?",
+    "DELETE_SUCCESS": "Konto erfolgreich gelöscht!",
+    "DELETE_ERROR": "Fehler beim Löschen des Kontos. Bitte versuchen Sie es erneut.",
+    "LOAD_ERROR": "Fehler beim Laden des Profils.",
+    "CANCEL": "Abbrechen"
+  },
+    "ABOUT": {
+      "TITLE": "Über diese App",
+      "DEVELOPERS_INFO": "Diese App wurde entwickelt von",
+      "AND": "&",
+      "COURSE_INFO": "im Rahmen des Spezialisierungskurses: Entwicklung mobiler Anwendungen. Das Projekt wurde unter der Anleitung und Aufsicht von",
+      "PROJECT_DESCRIPTION": "Die App wurde zwischen November und Dezember 2024 entwickelt, als Teil unseres akademischen Bestrebens, eine benutzerfreundliche Reise-Tagebuch-Plattform zu erstellen. Sie hilft Benutzern, ihre Reiseerlebnisse zu verfolgen, Erinnerungen zu dokumentieren und Ziele mit einer interaktiven Kartenoberfläche zu erkunden.",
+      "USER_EXPERIENCE": "Wir hoffen, dass diese App Ihre Reise bereichert, indem sie Ihnen ermöglicht, Ihre Reiseerinnerungen einfach zu speichern und erneut zu erleben, während sie Ihnen eine nahtlose Möglichkeit bietet, Ihre vergangenen Abenteuer zu verfolgen.",
+      "COPYRIGHT_TITLE": "Urheberrecht & Markenrecht",
+      "COPYRIGHT_INFO": "© 2024 Mohd Rayyan Shaikh & Ayesha Ahmed Dhool. Alle Rechte vorbehalten.",
+      "OWNERSHIP_INFO": "Diese App und ihr Inhalt sind Eigentum von Mohd Rayyan Shaikh & Ayesha Ahmed Dhool. Die unautorisierte Vervielfältigung oder Verbreitung eines Teils dieser App ist verboten. Alle Marken, Dienstleistungsmarken und Logos sind Eigentum ihrer jeweiligen Inhaber."
+    },
+    "BLOG": {
+      "TITLE": "Blog",
+      "SEARCH_PLACEHOLDER": "Blogeinträge durchsuchen",
+      "ALL": "Alle",
+      "RECENT": "Neueste",
+      "IMAGE_ALT": "Blog-Bild"
+    }
+}

@@ -1,28 +1,28 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/dashboard"></ion-back-button> <!-- Default href will go to the dashboard -->
+      <ion-back-button defaultHref="/dashboard"></ion-back-button>
     </ion-buttons>
-    <ion-title>Blog</ion-title>
+    <ion-title>{{ 'BLOG.TITLE' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <!-- Search bar placed below the header -->
-  <ion-searchbar 
-    [(ngModel)]="searchQuery" 
-    placeholder="Search Blog Posts" 
+  <!-- Search bar -->
+  <ion-searchbar
+    [(ngModel)]="searchQuery"
+    [placeholder]="'BLOG.SEARCH_PLACEHOLDER' | translate"
     (ionInput)="filterPosts()">
   </ion-searchbar>
 
-  <!-- Categories (All, Recent) -->
+  <!-- Categories -->
   <div class="categories">
     <ion-segment value="all" (ionChange)="onSegmentChange($event)">
       <ion-segment-button value="all">
-        <ion-label>All</ion-label>
+        <ion-label>{{ 'BLOG.ALL' | translate }}</ion-label>
       </ion-segment-button>
       <ion-segment-button value="recent">
-        <ion-label>Recent</ion-label>
+        <ion-label>{{ 'BLOG.RECENT' | translate }}</ion-label>
       </ion-segment-button>
     </ion-segment>
   </div>
@@ -31,7 +31,7 @@
   <ion-list>
     <ion-item *ngFor="let post of filteredPosts">
       <ion-thumbnail slot="start">
-        <img [src]="post.image" alt="Blog image">
+        <img [src]="post.image" [alt]="'BLOG.IMAGE_ALT' | translate">
       </ion-thumbnail>
       <ion-label>
         <h1>{{ post.blog }}</h1>
@@ -40,14 +40,15 @@
         <ion-text color="medium">{{ post.time }}</ion-text>
       </ion-label>
 
+      <!-- Open Button -->
       <ion-button fill="clear" slot="end" (click)="openPost(post.url)">
         <ion-icon name="open-outline"></ion-icon>
       </ion-button>
 
+      <!-- Read Aloud Button -->
       <ion-button fill="clear" slot="end" (click)="readPost(post.blog, post.title, post.summary)">
         <ion-icon name="volume-high-outline"></ion-icon>
       </ion-button>
-
     </ion-item>
   </ion-list>
 </ion-content>

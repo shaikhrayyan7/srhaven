@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-about',
@@ -7,8 +8,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./about.page.scss'],
 })
 export class AboutPage {
-  
-  constructor(private router: Router) {}
+  constructor(private router: Router, private translate: TranslateService) {
+    // Set the saved language when the page initializes
+    const savedLanguage = localStorage.getItem('appLanguage') || 'en';
+    this.translate.use(savedLanguage);
+  }
 
   // Method to redirect to the Dashboard page
   goToDashboard() {

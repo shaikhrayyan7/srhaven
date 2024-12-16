@@ -4,16 +4,25 @@
     min-height: 100vh;
   }
   
-  /* Logo Section */
-  .logo-container {
-    text-align: center;
-    margin-top: 50px;
-  }
-  
-  .logo {
-    height: 120px;
-    width: auto;
-  }
+/* Highlighted Logo Section */
+.logo-container {
+  text-align: center;
+  margin: 3vh auto; /* Space from the top */
+  position: relative;
+  padding: 20px; /* Add spacing around the logo */
+  background: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
+  border-radius: 12px; /* Rounded corners for a smooth look */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Shadow for emphasis */
+  z-index: 1; /* Ensure it is above the background */
+}
+
+/* Logo image styling */
+.logo-container .logo {
+  height: 110px; /* Adjust logo height */
+  width: auto; /* Maintain aspect ratio */
+  max-height: 20vh; /* Restrict maximum height for responsiveness */
+  z-index: 2; /* Ensure the logo stays above the container styling */
+}
   
   /* Form Container */
   .form-container {
@@ -21,26 +30,30 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    max-width: 400px; /* Limit the width of the form */
+    width: 90%; /* Default width for smaller screens */
+    max-width: 400px; /* Maximum width for larger screens */
     margin: 0 auto; /* Center the form horizontally */
-    padding: 20px; /* Add some padding */
-    background: rgba(255, 255, 255, 0.8); /* Light background */
-    border-radius: 10px; /* Rounded corners */
-  }
+    padding: 20px; /* Add padding for inner spacing */
+    background: rgba(255, 255, 255, 0.8); /* Light background for readability */
+    border-radius: 10px; /* Rounded corners for modern design */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    min-height: 60%; /* Minimum height to maintain proportion */
+    z-index: 1;
+}
   
   /* Input Styling */
   ion-item {
-    --background: rgba(10, 10, 10, 0.8);
+    --background: rgba(255, 255, 255, 0.7); /* Darker background for contrast */
     --border-radius: 8px;
     margin-bottom: 15px; /* Adjust margin between inputs */
-  }
+    width: 100%; /* Ensure inputs take full width of form */
+}
   
   /* Back to Login Text */
   .back-to-login {
     text-align: center;
     margin: 10px 0;
-    font-size: 14px;
+    font-size: 22px;
     color: #fb9208;
   }
   

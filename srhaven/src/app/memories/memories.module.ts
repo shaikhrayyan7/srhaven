@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { MemoriesPageRoutingModule } from './memories-routing.module';
 
 import { MemoriesPage } from './memories.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MemoriesPageRoutingModule
+    MemoriesPageRoutingModule,
+    TranslateModule
   ],
   declarations: [MemoriesPage]
 })

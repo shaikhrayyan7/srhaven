@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular'; // Import ToastController
+import { ToastController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-profile',
@@ -13,131 +14,93 @@ export class ProfilePage implements OnInit {
     firstName: '',
     lastName: '',
     email: '',
-    password: '', // Password is now part of the profile for updating
+    password: '',
   };
 
-  email: string = ''; // Holds the logged-in user's email
-  loading: boolean = true; // Used to display a loading spinner
-  passwordType: string = 'password'; // Password visibility control
+  email: string = '';
+  loading: boolean = true;
+  passwordType: string = 'password';
 
   constructor(
     private router: Router,
     private http: HttpClient,
-    private toastController: ToastController // Inject ToastController
-  ) {}
+    private toastController: ToastController,
+    private translate: TranslateService
+  ) {
+    const savedLanguage = localStorage.getItem('appLanguage') || 'en';
+    this.translate.use(savedLanguage);
+  }
 
   ngOnInit() {
-    this.email = localStorage.getItem('email') || ''; // Retrieve email from localStorage
-
+    this.email = localStorage.getItem('email') || '';
     if (!this.email) {
       console.error('No email found in localStorage.');
-      this.router.navigate(['/login']); // Redirect to login if no email
+      this.router.navigate(['/login']);
       return;
     }
-
-    // Fetch the user's profile using the stored email
     this.loadUserProfile();
   }
 
-  // Load user profile from the backend
   loadUserProfile() {
     this.http.get(`http://localhost:5000/api/users/${this.email}`).subscribe({
       next: (response: any) => {
-        this.user = { ...response, password: '' }; // Clear the password field when loading
-        console.log('User profile loaded:', this.user);
+        this.user = { ...response, password: '' };
         this.loading = false;
       },
       error: (error) => {
-        console.error('Error fetching user profile:', error);
+        console.error(this.translate.instant('PROFILE.LOAD_ERROR'), error);
         this.loading = false;
       },
     });
   }
 
-  // Toggle password visibility
   togglePasswordVisibility() {
     this.passwordType = this.passwordType === 'password' ? 'text' : 'password';
   }
 
-  // Update user profile
   onUpdate() {
     if (!this.user.firstName || !this.user.lastName || !this.user.email) {
-      this.showToast('All fields are required.');
+      this.showToast(this.translate.instant('PROFILE.ALL_FIELDS_REQUIRED'));
       return;
     }
 
     const updatePayload = {
       firstName: this.user.firstName,
       lastName: this.user.lastName,
-      email: this.user.email, // Email might be immutable
-      password: this.user.password || undefined, // Send only if password is provided
+      email: this.user.email,
+      password: this.user.password || undefined,
     };
 
     this.http.put(`http://localhost:5000/api/users/${this.email}`, updatePayload).subscribe({
-      next: (response: any) => {
-        console.log('Profile updated successfully:', response);
-        this.showToast('Profile updated successfully!'); // Show toast on success
-        // Update the email in localStorage if it was changed
-        if (this.user.email !== this.email) {
-          localStorage.setItem('email', this.user.email);
-          this.email = this.user.email;
-        }
-      },
-      error: (error) => {
-        console.error('Error updating profile:', error);
-        this.showToast('Failed to update profile. Please try again.'); // Show error toast
-      },
+      next: () => this.showToast(this.translate.instant('PROFILE.UPDATE_SUCCESS')),
+      error: () => this.showToast(this.translate.instant('PROFILE.UPDATE_ERROR')),
     });
   }
 
-  // Delete user account
   onDeleteAccount() {
-    // Show a toast to confirm deletion
-    this.showToast('Are you sure you want to delete your account?', true).then((toast) => {
-      toast.onDidDismiss().then(() => {
-        this.deleteAccount();
-      });
+    this.showToast(this.translate.instant('PROFILE.CONFIRM_DELETE'), true).then((toast) => {
+      toast.onDidDismiss().then(() => this.deleteAccount());
     });
   }
 
-  // Delete the account after confirmation
   deleteAccount() {
     this.http.delete(`http://localhost:5000/api/users/${this.email}`).subscribe({
       next: () => {
-        console.log('Account deleted successfully');
-        this.showToast('Account deleted successfully!'); // Show success toast
-        localStorage.removeItem('email'); // Clear the stored email
-        this.router.navigate(['/login']); // Redirect to login page after account deletion
+        this.showToast(this.translate.instant('PROFILE.DELETE_SUCCESS'));
+        localStorage.removeItem('email');
+        this.router.navigate(['/login']);
       },
-      error: (error) => {
-        console.error('Error deleting account:', error);
-        this.showToast('Failed to delete account. Please try again.'); // Show error toast
-      },
+      error: () => this.showToast(this.translate.instant('PROFILE.DELETE_ERROR')),
     });
   }
 
-  // Show toast message
   async showToast(message: string, showConfirmButton: boolean = false) {
     const toast = await this.toastController.create({
       message: message,
-      duration: showConfirmButton ? 0 : 4000, // Show for 4 seconds if no confirmation button
+      duration: showConfirmButton ? 0 : 4000,
       position: 'bottom',
       buttons: showConfirmButton
-        ? [
-            {
-              text: 'Cancel',
-              role: 'cancel',
-              handler: () => {
-                console.log('Deletion cancelled');
-              },
-            },
-            {
-              text: 'Confirm',
-              handler: () => {
-                console.log('User confirmed deletion');
-              },
-            },
-          ]
+        ? [{ text: this.translate.instant('PROFILE.CANCEL'), role: 'cancel' }]
         : [],
     });
     toast.present();

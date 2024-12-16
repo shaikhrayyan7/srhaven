@@ -11,7 +11,7 @@
 <ion-content>
   <!-- Section: Your Memories, Safely Stored -->
   <div class="memories-header">
-    <h3>𝓨𝓸𝓾𝓻 𝓜𝓮𝓶𝓸𝓻𝓲𝓮𝓼, 𝓢𝓪𝓯𝓮𝓵𝓎 𝓢𝓽𝓸𝓻𝓮𝓭!</h3>
+    <h3>{{ 'MEMORIES.HEADER' | translate }}</h3>
   </div>
 
   <!-- Section: User Pictures -->
@@ -19,11 +19,16 @@
     <!-- First Image Slot for Upload Button -->
     <ion-button class="add-picture" (click)="uploadPicture()">
       <ion-icon name="add-circle-outline" style="font-size: 50px;"></ion-icon>
+      {{ 'MEMORIES.ADD_IMAGE' | translate }}
     </ion-button>
 
     <!-- Loop through the memoryImages array and display each image -->
     <div class="memory-picture" *ngFor="let image of memoryImages">
-      <img [src]="image" alt="Memory" />
+      <img [src]="image" alt="{{ 'MEMORIES.IMAGE_ALT' | translate }}" />
     </div>
   </div>
 </ion-content>
+
+
+
+

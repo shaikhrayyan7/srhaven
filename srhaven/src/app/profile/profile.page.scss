@@ -5,6 +5,12 @@ ion-content {
     justify-content: space-between;
     --background: url('/assets/profile.jpg') no-repeat center center / cover;
   }
+
+  p {
+    color: #ffffff !important; /* White text */
+    font-size: 3rem; /* Adjust font size */
+    text-align: center; /* Center align all <p> tags */
+  }
   
   /* Profile Page Styling */
   .profile-container {

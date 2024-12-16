@@ -14,25 +14,31 @@
   <div class="profile-container">
     <!-- Form to display and edit user details -->
     <form (ngSubmit)="onUpdate()">
-      <p class="profile-heading">𝓨𝓸𝓾𝓻 𝓟𝓻𝓸𝓯𝓲𝓵𝓮, 𝓨𝓸𝓾𝓻 𝓟𝓪𝓼𝓼𝓹𝓸𝓻𝓽 𝓽𝓸 𝓜𝓮𝓶𝓸𝓻𝓲𝓮𝓼.</p>
+      <p class="profile-heading">
+        {{ 'PROFILE.HEADING' | translate }}
+      </p>
 
+      <!-- First Name -->
       <ion-item>
-        <ion-label position="floating">First Name</ion-label>
+        <ion-label position="floating">{{ 'PROFILE.FIRST_NAME' | translate }}</ion-label>
         <ion-input [(ngModel)]="user.firstName" name="firstName" required></ion-input>
       </ion-item>
 
+      <!-- Last Name -->
       <ion-item>
-        <ion-label position="floating">Last Name</ion-label>
+        <ion-label position="floating">{{ 'PROFILE.LAST_NAME' | translate }}</ion-label>
         <ion-input [(ngModel)]="user.lastName" name="lastName" required></ion-input>
       </ion-item>
 
+      <!-- Email -->
       <ion-item>
-        <ion-label position="floating">Email</ion-label>
+        <ion-label position="floating">{{ 'PROFILE.EMAIL' | translate }}</ion-label>
         <ion-input [(ngModel)]="user.email" name="email" type="email" readonly></ion-input>
       </ion-item>
 
+      <!-- Password -->
       <ion-item>
-        <ion-label position="floating">Enter New Password</ion-label>
+        <ion-label position="floating">{{ 'PROFILE.NEW_PASSWORD' | translate }}</ion-label>
         <ion-input
           [(ngModel)]="user.password"
           name="password"
@@ -47,11 +53,16 @@
         ></ion-icon>
       </ion-item>
 
-      <!-- Buttons for update and delete -->
+      <!-- Buttons -->
       <div class="buttons-container">
-        <ion-button type="submit" expand="full">Update</ion-button>
-        <ion-button expand="full" color="danger" (click)="onDeleteAccount()">Delete Account</ion-button>
+        <ion-button type="submit" expand="full">{{ 'PROFILE.UPDATE_BUTTON' | translate }}</ion-button>
+        <ion-button expand="full" color="danger" (click)="onDeleteAccount()">
+          {{ 'PROFILE.DELETE_BUTTON' | translate }}
+        </ion-button>
       </div>
     </form>
   </div>
 </ion-content>
+
+
+

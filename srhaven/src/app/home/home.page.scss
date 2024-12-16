@@ -1,26 +1,49 @@
 /* Responsive Background */
 ion-content {
-  --background: url('/assets/home.jpg') no-repeat center center / cover;
+  --background: none; /* Remove the direct background */
+  position: relative;
 }
 
-/* Responsive Logo Section */
+ion-content::after {
+  content: "";
+  background: url('/assets/home.jpg') no-repeat center center / cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.9; /* Adjust opacity for transparency */
+  z-index: -2; /* Place it behind content */
+  pointer-events: none; /* Ensure it doesn't interfere with clicks */
+}
+
+/* Highlighted Logo Section */
 .logo-container {
   text-align: center;
-  margin: 10vh auto; /* Space from the top */
+  margin: 16vh auto; /* Space from the top */
+  position: relative;
+  padding: 20px; /* Add spacing around the logo */
+  background: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
+  border-radius: 12px; /* Rounded corners for a smooth look */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Shadow for emphasis */
+  z-index: 1; /* Ensure it is above the background */
 }
 
-.logo {
-  height: 110px; /* Increase height */
+/* Logo image styling */
+.logo-container .logo {
+  height: 110px; /* Adjust logo height */
   width: auto; /* Maintain aspect ratio */
-  max-height: 20vh; /* Optional: Restrict maximum height for responsiveness */
+  max-height: 20vh; /* Restrict maximum height for responsiveness */
+  z-index: 2; /* Ensure the logo stays above the container styling */
 }
+
 
 /* Responsive Button Section */
 .button-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 5vh auto; /* Space from the logo */
+  margin: 6vh auto; /* Space from the logo */
 }
 
 .action-button {
@@ -52,4 +75,24 @@ ion-content {
   .action-button {
     width: 50%; /* Smaller button width for desktops */
   }
+}
+
+/* Language Dropdown with Highlighted Background */
+.language-dropdown {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
+  border-radius: 12px; /* Rounded corners */
+  padding: 8px 16px; /* Padding for better spacing */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Shadow for emphasis */
+}
+
+/* Style the language select dropdown */
+.language-select {
+  --placeholder-color: white; /* Placeholder text color */
+  --color: white; /* Selected text color */
+  font-weight: bold; /* Bold text */
+  font-size: 16px; /* Font size for better readability */
 }
