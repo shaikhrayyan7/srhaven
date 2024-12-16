@@ -1,15 +1,29 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Travel App
+    <!-- Back button that redirects to the previous page (e.g., dashboard) -->
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/dashboard"></ion-back-button> <!-- Default href will go to the dashboard -->
+    </ion-buttons>
+
+    <!-- Title to help center the logo -->
+    <ion-title class="ion-text-center">
+      <img src="assets/logo.png" alt="Logo" style="height: 40px;" />
     </ion-title>
+
+    <!-- No buttons on the right as the logo is centered -->
+    <ion-buttons slot="end">
+      <!-- You can remove this section if you don't need any buttons on the right -->
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Travel App</ion-title>
+      <!-- Title is collapsed into the toolbar when scrolled -->
+      <ion-title size="large">
+        <img src="assets/logo.png" alt="Logo" style="height: 40px;" />
+      </ion-title>
     </ion-toolbar>
   </ion-header>
 

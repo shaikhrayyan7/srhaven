@@ -21,23 +21,27 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    loadChildren: () => import('./dashboard/dashboard.module').then( m => m.DashboardPageModule)
+    loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardPageModule),
   },
   {
     path: 'memories',
-    loadChildren: () => import('./memories/memories.module').then( m => m.MemoriesPageModule)
+    loadChildren: () => import('./memories/memories.module').then(m => m.MemoriesPageModule),
   },
   {
     path: 'journey',
-    loadChildren: () => import('./journey/journey.module').then( m => m.JourneyPageModule)
+    loadChildren: () => import('./journey/journey.module').then(m => m.JourneyPageModule),
   },
   {
     path: 'profile',
-    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+    loadChildren: () => import('./profile/profile.module').then(m => m.ProfilePageModule),
   },
   {
     path: 'about',
-    loadChildren: () => import('./about/about.module').then( m => m.AboutPageModule)
+    loadChildren: () => import('./about/about.module').then(m => m.AboutPageModule),
+  },
+  {
+    path: 'create-memory',
+    loadChildren: () => import('./create-memory/create-memory.module').then(m => m.CreateMemoryPageModule),
   },
 ];
 

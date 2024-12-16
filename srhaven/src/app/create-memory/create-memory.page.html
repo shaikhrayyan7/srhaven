@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/dashboard"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Create Memory</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Display Captured Image -->
+  <div *ngIf="capturedImage" class="image-container">
+    <img [src]="capturedImage" alt="Captured Image" />
+  </div>
+
+  <!-- Display Memory Details -->
+  <div class="details">
+    <p><strong>Place:</strong> {{ place || 'Not Detected' }}</p>
+    <p><strong>Date:</strong> {{ date || 'Not Available' }}</p>
+    <p><strong>GPS Coordinates:</strong> {{ gpsCoordinates || 'Not Available' }}</p>
+  </div>
+
+  <!-- Save to Memories Button -->
+  <ion-button expand="block" color="primary" (click)="saveMemory()">
+    Save to Memories
+  </ion-button>
+</ion-content>

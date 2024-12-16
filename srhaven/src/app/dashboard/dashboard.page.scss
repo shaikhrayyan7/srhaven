@@ -122,5 +122,48 @@ ion-content {
       height: 100px; /* Adjust height */
       font-size: 0.8rem;
     }
+
+    /* Button Container Styling */
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Space between buttons */
+  margin-top: 20px;
+}
+
+/* Capture Image Button Styling */
+#capture-image-button,
+#cancel-button {
+  --background: #fb9208 !important; /* Default blue background for buttons */
+  --color: #fff !important; /* White button text */
+  font-size: 0.9rem; /* Smaller font size */
+  padding: 8px 16px; /* Reduced padding */
+  border-radius: 6px; /* Rounded edges */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15); /* Subtle shadow */
+  font-weight: bold; /* Bold text */
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+/* Hover Effect for Both Buttons */
+#capture-image-button:hover,
+#cancel-button:hover {
+  transform: scale(1.05); /* Slight enlargement on hover */
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+/* Cancel Button Specific Styling */
+#cancel-button {
+  --background: #dc3545 !important; /* Red background for cancel */
+  --color: #fff !important; /* White text */
+}
+
+/* Adjust for Smaller Screens */
+@media (max-width: 480px) {
+  #capture-image-button,
+  #cancel-button {
+    font-size: 0.8rem; /* Smaller font for small screens */
+    padding: 6px 12px; /* Compact padding */
   }
+}
+}
   

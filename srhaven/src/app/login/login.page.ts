@@ -18,20 +18,16 @@ export class LoginPage {
 
   // Method triggered when the login form is submitted
   onLogin() {
-    const loginData = {
-      email: this.email,
-      password: this.password
-    };
+    const loginData = { email: this.email, password: this.password };
   
     this.http.post('http://localhost:5000/api/login', loginData).subscribe({
       next: (response: any) => {
-        // Log or show only the success message as per your requirement
         if (response.message === 'Login successful') {
-          this.router.navigate(['/dashboard']); // Redirect after login
+          localStorage.setItem('email', this.email); // Save email to localStorage
+          this.router.navigate(['/dashboard']); // Navigate to the dashboard
         }
       },
       error: (error) => {
-        // Display backend-provided error messages in case of failure
         this.errorMessage = error?.error?.error || 'Login failed. Please try again.';
       }
     });

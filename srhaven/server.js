@@ -2,6 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const bcrypt = require('bcrypt');
+const multer = require('multer');
+const path = require('path');
 
 // Create Express app
 const app = express();
@@ -9,7 +12,7 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
-
+app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Serve uploaded files
 
 // Connect to MongoDB
 mongoose
@@ -38,34 +41,74 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-// Transform the schema for cleaner JSON response
-userSchema.set('toJSON', {
-  transform: (doc, ret) => {
-    delete ret.__v;
-    delete ret.password; // Remove sensitive data
-    return ret;
-  },
-});
-
 // Create the User model
 const User = mongoose.model('User', userSchema);
 
-// Route for signing up a new user
+// Define the Memory schema with an embedded array of images (Now image is stored as Buffer directly in DB)
+const memorySchema = new mongoose.Schema(
+  {
+    email: { type: String, unique: true, required: true },
+    memories: [
+      {
+        image: { type: Buffer, required: true },  // Buffer to store image data directly in DB
+        mimeType: { type: String, required: true }, // MIME type of the image
+        place: { type: String, default: 'Unknown' },
+        gpsCoordinates: { type: String, default: 'Not available' },
+        date: { type: Date, default: Date.now },
+      },
+    ],
+  },
+  {
+    timestamps: true,
+    versionKey: false,
+  }
+);
+
+// Create the Memory model
+const Memory = mongoose.model('Memory', memorySchema);
+
+// Set up multer for image uploads (saving to memory, not disk)
+const storage = multer.memoryStorage();  // Store image in memory (no disk)
+
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 10 * 1024 * 1024 }, // 5MB limit
+  fileFilter: (req, file, cb) => {
+    const filetypes = /jpeg|jpg|png|gif/;
+    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+    const mimetype = filetypes.test(file.mimetype);
+
+    if (mimetype && extname) {
+      return cb(null, true);
+    } else {
+      cb(new Error('Only image files are allowed (jpeg, jpg, png, gif)'));
+    }
+  },
+});
+
+// --- User Routes ---
+
+// Signup
 app.post('/api/signup', async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
 
   try {
-    // Check if the email already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ error: 'Email already in use' });
     }
 
-    // Create a new user
-    const newUser = new User({ firstName, lastName, email, password });
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newUser = new User({
+      firstName,
+      lastName,
+      email,
+      password: hashedPassword,
+    });
+
     await newUser.save();
 
-    // Respond with only a success message
     res.status(201).json({ message: 'Signup successful' });
   } catch (error) {
     console.error('Error during signup:', error);
@@ -73,24 +116,17 @@ app.post('/api/signup', async (req, res) => {
   }
 });
 
-// Route to validate user login
-const bcrypt = require('bcrypt'); // Import bcrypt for password comparison
+// Login
 app.post('/api/login', async (req, res) => {
   const { email, password } = req.body;
 
   try {
     const user = await User.findOne({ email });
     if (!user) {
-      console.log('User not found:', email);
       return res.status(404).json({ error: 'User not found' });
     }
 
-    console.log('Stored password hash:', user.password);
-    console.log('Password entered:', password);
-
     const isMatch = await bcrypt.compare(password, user.password);
-    console.log('Password match result:', isMatch);
-
     if (!isMatch) {
       return res.status(401).json({ error: 'Incorrect password' });
     }
@@ -102,76 +138,57 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
-// Route to get the authenticated user's profile
+// Fetch User Profile
 app.get('/api/users/:email', async (req, res) => {
   const email = req.params.email;
 
   try {
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }); // Fetch user by email
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
+
+    // Include all necessary fields in the response
     res.status(200).json({
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
-    }); // Only send necessary details
+      password: user.password, // If including password, ensure proper hashing and security measures are in place
+    });
   } catch (error) {
-    console.error('Error fetching user profile:', error);
-    res.status(500).json({ error: 'Failed to fetch user profile' });
+    console.error('Error fetching user:', error);
+    res.status(500).json({ error: 'Failed to fetch user. Please try again later.' });
   }
 });
 
-// Route to update a user's details
+// Update User
 app.put('/api/users/:email', async (req, res) => {
   const email = req.params.email;
   const { firstName, lastName, email: newEmail, password } = req.body;
 
   try {
-    // Prepare updated fields
-    const updates = {
-      firstName,
-      lastName,
-    };
+    const updates = { firstName, lastName };
+    if (newEmail) updates.email = newEmail;
+    if (password) updates.password = await bcrypt.hash(password, 10);
 
-    if (newEmail) {
-      updates.email = newEmail; // Include email if provided
-    }
-
-    if (password) {
-      const hashedPassword = await bcrypt.hash(password, 10); // Hash password
-      updates.password = hashedPassword; // Include hashed password
-    }
-
-    const updatedUser = await User.findOneAndUpdate(
-      { email },
-      updates,
-      { new: true } // Return the updated document
-    );
-
+    const updatedUser = await User.findOneAndUpdate({ email }, updates, { new: true });
     if (!updatedUser) {
       return res.status(404).json({ error: 'User not found' });
     }
 
-    res.status(200).json({
-      message: 'Profile updated successfully',
-      user: updatedUser,
-    });
+    res.status(200).json({ message: 'Profile updated successfully', user: updatedUser });
   } catch (error) {
     console.error('Error updating profile:', error);
     res.status(500).json({ error: 'Failed to update profile' });
   }
 });
 
-
-// DELETE user by email
+// Delete User
 app.delete('/api/users/:email', async (req, res) => {
   const email = req.params.email;
 
   try {
-    // Find and delete the user by email
     const deletedUser = await User.findOneAndDelete({ email });
-
     if (!deletedUser) {
       return res.status(404).json({ error: 'User not found' });
     }
@@ -179,10 +196,75 @@ app.delete('/api/users/:email', async (req, res) => {
     res.status(200).json({ message: 'User deleted successfully' });
   } catch (error) {
     console.error('Error deleting user:', error);
-    res.status(500).json({ error: 'Failed to delete user. Please try again later.' });
+    res.status(500).json({ error: 'Failed to delete user' });
   }
 });
 
+// --- Memory Routes ---
+
+// Upload Memory (Image will be stored in memory, not disk)
+app.post('/api/upload', upload.single('image'), async (req, res) => {
+  try {
+    const { email, place, gpsCoordinates } = req.body;
+
+    if (!email) {
+      return res.status(400).json({ error: 'Email is required' });
+    }
+
+    // Verify that the user exists
+    const userExists = await User.findOne({ email });
+    if (!userExists) {
+      return res.status(404).json({ error: 'User with this email does not exist' });
+    }
+
+    // Get image from memory (multer stores it in req.file.buffer)
+    const imageBuffer = req.file.buffer;  // Image is now in memory
+    const mimeType = req.file.mimetype;
+
+    const newMemory = {
+      image: imageBuffer,
+      mimeType: mimeType,
+      place: place || 'Unknown',
+      gpsCoordinates: gpsCoordinates || 'Not available',
+    };
+
+    // Save the memory in the database
+    const memory = await Memory.findOneAndUpdate(
+      { email },
+      { $push: { memories: newMemory } },
+      { new: true, upsert: true }
+    );
+
+    res.status(201).json({ message: 'Image uploaded and saved successfully', memory });
+  } catch (err) {
+    console.error('Error uploading image:', err);
+    res.status(500).json({ error: 'Error uploading image' });
+  }
+});
+
+// Fetch Memories
+app.get('/api/memories/:email', async (req, res) => {
+  try {
+    const memories = await Memory.findOne({ email: req.params.email });
+
+    if (!memories || !memories.memories.length) {
+      return res.status(404).json({ message: 'No memories found for this user' });
+    }
+
+    // Convert binary data to base64 strings for display
+    const formattedMemories = memories.memories.map(memory => ({
+      image: `data:${memory.mimeType};base64,${memory.image.toString('base64')}`,
+      place: memory.place,
+      gpsCoordinates: memory.gpsCoordinates,
+      date: memory.date,
+    }));
+
+    res.status(200).json({ memories: formattedMemories });
+  } catch (err) {
+    console.error('Error fetching memories:', err);
+    res.status(500).json({ error: 'Error fetching memories' });
+  }
+});
 
 // Start the server
 const PORT = 5000;

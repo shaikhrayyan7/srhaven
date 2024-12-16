@@ -1,9 +1,15 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'srhaven',
-  webDir: 'www'
+  appId: 'com.example.myapp',
+  appName: 'MyApp',
+  webDir: 'www',
+  plugins: {
+    Camera: {
+      android: {
+        saveToGallery: true, // Ensure images are saved
+      },
+    },
+  },
 };
-
 export default config;

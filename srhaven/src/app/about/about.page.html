@@ -1,12 +1,19 @@
 <ion-header>
   <ion-toolbar>
-    <!-- Logo in the header that redirects to the dashboard -->
+    <!-- Back button that redirects to the previous page (e.g., dashboard) -->
     <ion-buttons slot="start">
-      <ion-button (click)="goToDashboard()">
-        <img src="assets/logo.png" alt="Logo" style="height: 40px;" />
-      </ion-button>
+      <ion-back-button defaultHref="/dashboard"></ion-back-button> <!-- Default href will go to the dashboard -->
     </ion-buttons>
-    <ion-title></ion-title> <!-- Title left empty as logo will be the focus -->
+
+    <!-- Title to help center the logo -->
+    <ion-title class="ion-text-center">
+      <img src="assets/logo.png" alt="Logo" style="height: 40px;" />
+    </ion-title>
+
+    <!-- No buttons on the right as the logo is centered -->
+    <ion-buttons slot="end">
+      <!-- You can remove this section if you don't need any buttons on the right -->
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -25,7 +32,7 @@
 
     <h3>Copyright & Trademark</h3>
     <p>
-      © 2024 Mohd Rayyan Shaikh & Ayesha Dhool. All rights reserved.
+      <b>© 2024 Mohd Rayyan Shaikh & Ayesha Dhool. All rights reserved.</b>
     </p>
     <p>
       This app and its contents are the property of Mohd Rayyan Shaikh & Ayesha Dhool. Unauthorized reproduction or distribution of any part of this app is prohibited. All trademarks, service marks, and logos are the property of their respective owners.

@@ -1,0 +1,53 @@
+ion-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 56px); /* Subtract header height (56px for default IonHeader) */
+    padding-top: 20px; /* Add padding to create space below the header */
+    --background: url('/assets/creatememories.jpeg') no-repeat center center / cover;
+    color: #ffffff;
+  }
+  
+  .details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.6); /* Semi-transparent background for readability */
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 20px; /* Add margin above the details box to separate from the image */
+  
+    p {
+      font-size: 1.2rem;
+      margin: 5px 0;
+    }
+  }
+  
+  img {
+    display: block;
+    max-width: 100%; /* Ensure the image scales to fit the container */
+    max-height: 300px; /* Limit the height to prevent large images from taking over */
+    object-fit: contain; /* Maintain aspect ratio while fitting within bounds */
+    border-radius: 10px;
+    margin: 20px 0; /* Add spacing above and below */
+  }
+  
+  ion-button {
+    margin-top: 20px; /* Space between the button and the .details section */
+    --background: #ff5733;
+    --color: #ffffff;
+    border-radius: 5px;
+    font-weight: bold;
+    padding: 5px 10px; /* Adjust padding for a snug fit */
+    width: auto; /* Ensure button's width fits its content */
+    height: auto; /* Adjust height to fit content */
+    text-align: center;
+    display: block; /* Ensure it behaves like a block element */
+  }
+  
+  
+  
+  
