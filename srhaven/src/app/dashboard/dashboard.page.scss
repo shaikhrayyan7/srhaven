@@ -165,5 +165,21 @@ ion-content {
     padding: 6px 12px; /* Compact padding */
   }
 }
+
+.speech-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.start-speech {
+  background-color: orange; /* Change the button's background to orange */
+  color: white; /* Ensure the icon color contrasts with the background */
+}
+
+#start-speech:hover {
+  background-color: darkorange; /* Optional: Add a hover effect */
+}
+
 }
   

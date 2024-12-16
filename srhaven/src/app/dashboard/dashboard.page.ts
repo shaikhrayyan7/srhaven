@@ -10,12 +10,23 @@ import { Router } from '@angular/router';
 })
 export class DashboardPage {
   capturedImage: string = '';
+  recognition: any;
   isWebCameraOpen: boolean = false; // Track if the webcam is open
+
+  // Map menu labels to their respective routes
+  menuRoutes: { [key: string]: string } = {
+    'memories album': '/memories',
+    'journey diary': '/journey',
+    'profile': '/profile',
+    'blog': '/blog',
+    'about the app': '/about',
+  };
 
   constructor(private router: Router, private platform: Platform) {}
 
   ionViewWillEnter() {
     console.log('Welcome to the Dashboard!');
+    this.initializeSpeechRecognition(); // Initialize speech recognition when the page loads
   }
 
   // Open the camera to take a picture
@@ -104,5 +115,47 @@ export class DashboardPage {
   onMenuItemClick(route: string) {
     console.log(`Navigating to ${route}`);
     this.router.navigate([route]);
+  }
+
+  initializeSpeechRecognition() {
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (SpeechRecognition) {
+      console.log('SpeechRecognition API is available');
+      this.recognition = new SpeechRecognition();
+      this.recognition.lang = 'en-US';
+      this.recognition.continuous = false;
+      this.recognition.interimResults = false;
+
+      this.recognition.onstart = () => console.log('Speech recognition started');
+      this.recognition.onend = () => console.log('Speech recognition ended');
+      this.recognition.onresult = (event: any) => {
+        console.log('Speech recognition result:', event);
+        const command = event.results[0][0].transcript.toLowerCase();
+        console.log('Recognized command:', command);
+        this.handleSpeechCommand(command);
+      };
+      this.recognition.onerror = (event: any) => console.error('Speech recognition error:', event.error);
+    } else {
+      console.error('Speech Recognition API not supported in this browser.');
+    }
+  }
+
+  startListening() {
+    if (this.recognition) {
+      this.recognition.start();
+    } else {
+      console.warn('Speech recognition not initialized.');
+    }
+  }
+
+  handleSpeechCommand(command: string) {
+    console.log('Received command:', command);
+    const matchedRoute = Object.keys(this.menuRoutes).find(label => command.includes(label.toLowerCase()));
+    if (matchedRoute) {
+      console.log('Matched route:', this.menuRoutes[matchedRoute]);
+      this.router.navigate([this.menuRoutes[matchedRoute]]);
+    } else {
+      console.log('Command not recognized:', command);
+    }
   }
 }

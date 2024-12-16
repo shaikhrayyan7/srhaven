@@ -42,7 +42,11 @@ const routes: Routes = [
   {
     path: 'create-memory',
     loadChildren: () => import('./create-memory/create-memory.module').then(m => m.CreateMemoryPageModule),
+  },  {
+    path: 'blog',
+    loadChildren: () => import('./blog/blog.module').then( m => m.BlogPageModule)
   },
+
 ];
 
 @NgModule({

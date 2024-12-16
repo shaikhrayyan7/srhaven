@@ -25,7 +25,7 @@
     "@capacitor-community/sqlite": "^6.0.2",
     "@capacitor/android": "^6.2.0",
     "@capacitor/app": "6.0.2",
-    "@capacitor/camera": "^6.1.1",
+    "@capacitor/camera": "^6.1.2",
     "@capacitor/core": "^6.2.0",
     "@capacitor/geolocation": "^6.1.0",
     "@capacitor/haptics": "6.0.2",
