@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Camera, CameraResultType } from '@capacitor/camera';
 import { Geolocation } from '@capacitor/geolocation';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { ToastController } from '@ionic/angular';
 
 @Component({
@@ -84,31 +84,28 @@ export class CreateMemoryPage {
       await this.showToast('User email is missing. Please log in again.');
       return;
     }
-
-    const memoryData = {
-      image: this.capturedImage,
-      place: this.place || 'Unknown Place',
-      date: this.date || new Date().toISOString(),
-      gpsCoordinates: this.gpsCoordinates || 'Unknown Coordinates',
-      userEmail: this.userEmail,
-    };
-
-    console.log('Memory Data to be sent:', memoryData); // Debug the payload
-
+  
     try {
-      const response = await this.http.post('http://localhost:5000/api/upload', memoryData, {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json',
-        }),
-      }).toPromise();
-      console.log('Memory saved successfully:', response);
-      await this.showToast('Memory saved successfully!');
+      // Create a FormData object to handle the multipart request
+      const formData = new FormData();
+  
+      // Convert the base64 image to a Blob
+      const response = await fetch(this.capturedImage);
+      const blob = await response.blob();
+  
+      // Append the Blob and other form data
+      formData.append('image', blob, 'memory.jpg'); // 'memory.jpg' is the file name
+      formData.append('email', this.userEmail);
+      formData.append('place', this.place);
+      formData.append('date', this.date);
+      formData.append('gpsCoordinates', this.gpsCoordinates);
+  
+      // Send the multipart request
+      await this.http.post('http://localhost:5000/api/upload', formData).toPromise();
+      console.log('Memory saved successfully.');
       this.router.navigate(['/memories']);
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error saving memory:', error);
-      if (error.status === 400) {
-        console.error('Server rejected the request. Check the payload structure.');
-      }
       await this.showToast('Failed to save memory. Please try again.');
     }
   }
