@@ -6,7 +6,16 @@ ion-content {
     --background: url('/assets/memories.jpg') no-repeat center center / cover;
   }
 
-
+  .custom-header {
+    --background: orange; /* Changes the background color */
+    color: white; /* Sets the text color to white for better contrast */
+  }
+  
+  ion-toolbar {
+    --background: orange; /* Target toolbar specifically */
+    --color: white; /* Ensure the text/icon color is white */
+  }
+  
 .memories-header {
     text-align: center;
     margin-top: 20px;
@@ -20,7 +29,7 @@ ion-content {
   .memories-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 3 images per row */
-    gap: 10px;
+    gap: 5px;
     padding: 20px;
   }
   

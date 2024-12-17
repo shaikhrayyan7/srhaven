@@ -29,6 +29,16 @@ ion-searchbar {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Light shadow */
 }
 
+.custom-header {
+  --background: #e89c0c; /* Header background color */
+  --color: white; /* Optional: Text and icon color */
+}
+
+ion-toolbar {
+  --background: #e89c0c; /* Toolbar background color */
+  --color: white; /* Optional: Ensures text/icons remain visible */
+}
+
 /* Category Segment Styling */
 .categories {
   padding: 10px 16px;

@@ -8,6 +8,16 @@ ion-content {
     --background: url('/assets/creatememories.jpeg') no-repeat center center / cover;
     color: #ffffff;
   }
+
+  .custom-header {
+    --background: orange; /* Changes the background color */
+    color: white; /* Sets the text color to white for better contrast */
+  }
+  
+  ion-toolbar {
+    --background: orange; /* Target toolbar specifically */
+    --color: white; /* Ensure the text/icon color is white */
+  }
   
   .details {
     display: flex;

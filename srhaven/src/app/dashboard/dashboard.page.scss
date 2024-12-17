@@ -7,6 +7,16 @@ ion-content {
   --background: url('/assets/dashboard1.jpg') no-repeat center center / cover;
 }
 
+.custom-header {
+  --background: orange; /* Changes the background color */
+  color: white; /* Sets the text color to white for better contrast */
+}
+
+ion-toolbar {
+  --background: orange; /* Target toolbar specifically */
+  --color: white; /* Ensure the text/icon color is white */
+}
+
 /* Styling for the Header Section */
 .dashboard-header {
   text-align: center;
@@ -198,5 +208,16 @@ ion-item {
   #cancel-button {
     font-size: 0.8rem;
     padding: 6px 12px;
+  }
+}
+
+ion-item[aria-label="LOGOUT"] {
+  --color: #e74c3c; /* Red color for logout option */
+  font-weight: bold;
+  transition: color 0.2s ease;
+
+  &:hover {
+    --color: #c0392b; /* Darker red on hover */
+    transform: scale(1.05);
   }
 }

@@ -6,6 +6,16 @@ ion-content {
     --background: url('/assets/profile.jpg') no-repeat center center / cover;
   }
 
+  .custom-header {
+    --background: #e89c0c; /* Header background color */
+    --color: white; /* Optional: Text and icon color */
+  }
+  
+  ion-toolbar {
+    --background: #e89c0c; /* Toolbar background color */
+    --color: white; /* Optional: Ensures text/icons remain visible */
+  }
+
   p {
     color: #ffffff !important; /* White text */
     font-size: 3rem; /* Adjust font size */

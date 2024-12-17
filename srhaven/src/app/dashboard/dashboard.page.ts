@@ -3,6 +3,18 @@ import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { Injectable } from '@angular/core';
+import { AlertController } from '@ionic/angular';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class AuthService {
+  logout() {
+    localStorage.removeItem('userToken'); // Clear the user token
+    sessionStorage.clear();
+  }
+}
 
 @Component({
   selector: 'app-dashboard',
@@ -26,7 +38,9 @@ export class DashboardPage {
   constructor(
     private router: Router,
     private platform: Platform,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private authService: AuthService,
+    private alertController: AlertController
   ) {
     // Apply the selected language from localStorage
     const savedLanguage = localStorage.getItem('appLanguage') || 'en';
@@ -139,11 +153,36 @@ export class DashboardPage {
   }
 
   // logout() {
-  //   // Clear stored authentication data
-  //   localStorage.removeItem('token'); // Adjust key as needed
-  //   sessionStorage.clear();
-  
-  //   // Redirect to login page
-  //   this.router.navigate(['/login']);
+  //   this.authService.logout(); // Clear user session
+  //   this.router.navigate(['/login'], { state: { clearFields: true } }); // Pass state to clear fields
   // }
+
+  async confirmLogout() {
+    const alert = await this.alertController.create({
+      header: this.translate.instant('LOGOUT.CONFIRM_HEADER') || 'Confirm Logout',
+      message: this.translate.instant('LOGOUT.CONFIRM_MESSAGE') || 'Are you sure you want to log out?',
+      buttons: [
+        {
+          text: this.translate.instant('LOGOUT.CANCEL') || 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: this.translate.instant('LOGOUT.CONFIRM') || 'Logout',
+          handler: () => {
+            this.logout();
+          },
+        },
+      ],
+    });
+    await alert.present();
+  }
+
+  logout() {
+    this.authService.logout(); // Clear user session
+    this.router.navigateByUrl('/home', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/home']);
+    });
+  }
+  
+
 }

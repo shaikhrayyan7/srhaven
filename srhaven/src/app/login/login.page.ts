@@ -24,6 +24,12 @@ export class LoginPage {
     this.translate.use(savedLanguage);
   }
 
+  ngOnInit() {
+    this.email = '';
+    this.password = '';
+    this.errorMessage = '';
+  }
+  
   // Method triggered when the login form is submitted
   onLogin() {
     const loginData = { email: this.email, password: this.password };

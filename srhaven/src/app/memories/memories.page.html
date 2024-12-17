@@ -1,10 +1,14 @@
 <ion-header>
   <ion-toolbar>
+    <!-- Back button that redirects to the dashboard -->
     <ion-buttons slot="start">
-      <ion-button (click)="navigateToDashboard()">
-        <img src="assets/logo.png" alt="Logo" style="height: 40px;" />
-      </ion-button>
+      <ion-back-button defaultHref="/dashboard"></ion-back-button>
     </ion-buttons>
+
+    <!-- Title with the centered logo -->
+    <ion-title class="ion-text-center">
+      <img src="assets/logo2.png" alt="Logo" style="height: 30px;" />
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -18,7 +22,7 @@
   <div class="memories-grid">
     <!-- First Image Slot for Upload Button -->
     <ion-button class="add-picture" (click)="uploadPicture()">
-      <ion-icon name="add-circle-outline" style="font-size: 50px;"></ion-icon>
+      <ion-icon name="add-circle-outline" style="font-size: 30px;"></ion-icon>
       {{ 'MEMORIES.ADD_IMAGE' | translate }}
     </ion-button>
 

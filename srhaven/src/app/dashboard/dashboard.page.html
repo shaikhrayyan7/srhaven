@@ -5,25 +5,32 @@
     </ion-toolbar>
   </ion-header>
   <ion-content>
+
     <ion-item (click)="onMenuItemClick('/memories')">
       <ion-label>{{ 'DASHBOARD.MEMORIES' | translate }}</ion-label>
     </ion-item>
+
     <ion-item (click)="onMenuItemClick('/journey')">
       <ion-label>{{ 'DASHBOARD.JOURNEY' | translate }}</ion-label>
     </ion-item>
+
     <ion-item (click)="onMenuItemClick('/profile')">
       <ion-label>{{ 'DASHBOARD.PROFILE' | translate }}</ion-label>
     </ion-item>
+
     <ion-item (click)="onMenuItemClick('/blog')">
       <ion-label>{{ 'DASHBOARD.BLOG' | translate }}</ion-label>
     </ion-item>
+    
     <ion-item (click)="onMenuItemClick('/about')">
       <ion-label>{{ 'DASHBOARD.ABOUT' | translate }}</ion-label>
     </ion-item>
-    <!-- <ion-item (click)="logout()">
+
+    <ion-item (click)="confirmLogout()">
       <ion-label>{{ 'DASHBOARD.LOGOUT' | translate }}</ion-label>
-      <ion-icon slot="start" name="log-out-outline"></ion-icon>
-    </ion-item> -->
+      <!-- <ion-icon slot="start" name="log-out-outline"></ion-icon> -->
+    </ion-item>
+    
   </ion-content>
 </ion-menu>
 

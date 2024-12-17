@@ -46,7 +46,7 @@
     "MEMORIES": {
       "TITLE": "Memories",
       "HEADER": "𝓨𝓸𝓾𝓻 𝓜𝓮𝓶𝓸𝓻𝓲𝓮𝓼, 𝓢𝓪𝓯𝓮𝓵𝓎 𝓢𝓽𝓸𝓻𝓮𝓭!",
-      "ADD_IMAGE": "Add a New Memory",
+      "ADD_IMAGE": "Add new memory",
       "IMAGE_ALT": "Memory Image",
       "CHOOSE_IMAGE": "Choose an Image",
       "SELECT_FROM_GALLERY": "Select from Gallery",
@@ -89,6 +89,12 @@
       "ALL": "All",
       "RECENT": "Recent",
       "IMAGE_ALT": "Blog Image"
+    },
+    "LOGOUT": {
+      "CONFIRM_HEADER": "Confirm Logout",
+      "CONFIRM_MESSAGE": "Are you sure you want to log out?",
+      "CANCEL": "Cancel",
+      "CONFIRM": "Logout"
     }
   
 }

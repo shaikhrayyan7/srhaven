@@ -45,7 +45,7 @@
   "MEMORIES": {
     "TITLE": "Erinnerungen",
     "HEADER": "Ihre Erinnerungen, sicher gespeichert!",
-    "ADD_IMAGE": "Ein neues Andenken hinzufügen",
+    "ADD_IMAGE": "Bild einfügen",
     "IMAGE_ALT": "Erinnerungsbild",
     "CHOOSE_IMAGE": "Wählen Sie ein Bild",
     "SELECT_FROM_GALLERY": "Aus der Galerie auswählen",
@@ -88,5 +88,12 @@
       "ALL": "Alle",
       "RECENT": "Neueste",
       "IMAGE_ALT": "Blog-Bild"
+    },
+    "LOGOUT": {
+      "CONFIRM_HEADER": "Abmeldung bestätigen",
+      "CONFIRM_MESSAGE": "Sind Sie sicher, dass Sie sich abmelden möchten?",
+      "CANCEL": "Abbrechen",
+      "CONFIRM": "Abmelden"
     }
+
 }
