@@ -1,0 +1,43 @@
+.subscription-card {
+    background: #fffae6;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+
+  .custom-header {
+    --background: #e89c0c; /* Header background color */
+    --color: white; /* Optional: Text and icon color */
+  }
+  
+  ion-toolbar {
+    --background: #e89c0c; /* Toolbar background color */
+    --color: white; /* Optional: Ensures text/icons remain visible */
+  }
+  
+  
+  .subscription-card h2,
+  .subscription-card h3 {
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+  
+  ion-item {
+    margin-bottom: 1rem;
+  }
+  
+  .pay-button {
+    margin-top: 1.5rem;
+    color: green;
+  }
+  
+  ion-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    --background: url('/assets/about.jpg') no-repeat center center / cover;
+    padding: 20px;
+  }

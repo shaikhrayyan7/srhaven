@@ -46,6 +46,10 @@ const routes: Routes = [
     path: 'blog',
     loadChildren: () => import('./blog/blog.module').then( m => m.BlogPageModule)
   },
+  {
+    path: 'subscription',
+    loadChildren: () => import('./subscription/subscription.module').then( m => m.SubscriptionPageModule)
+  },
 
 ];
 

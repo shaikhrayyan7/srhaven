@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- Back button that redirects to the dashboard -->
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/dashboard"></ion-back-button>
+    </ion-buttons>
+
+    <!-- Title with the centered logo -->
+    <ion-title class="ion-text-center">
+      <img src="assets/logo2.png" alt="Logo" style="height: 30px;" />
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="subscription-card">
+    <h4><b>To get unlimited memories space. Get subscription for 49€!</b></h4>
+
+    <ion-item>
+      <ion-label position="floating">Description:</ion-label>
+      <ion-input [(ngModel)]="description"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Enter IBAN:</ion-label>
+      <ion-input [(ngModel)]="userIBAN"></ion-input>
+    </ion-item>
+
+    <!-- Flex Container for Amount and SRHaven IBAN -->
+    <div class="flex-container">
+      <ion-item class="flex-item">
+        <ion-label>Amount (€):</ion-label>
+        <ion-input [value]="subscriptionAmount" disabled></ion-input>
+      </ion-item>
+
+      <ion-item class="flex-item">
+        <ion-label>SRHaven IBAN:</ion-label>
+        <ion-input [value]="srHavenIBAN" disabled></ion-input>
+      </ion-item>
+    </div>
+
+    <div class="pay-button">
+      <ion-button expand="block" color="success" (click)="paySubscription()">
+        PAY
+      </ion-button>
+    </div>
+  </div>
+</ion-content>
