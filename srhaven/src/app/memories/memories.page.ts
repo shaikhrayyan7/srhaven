@@ -14,6 +14,7 @@ export class MemoriesPage implements OnInit {
   imageCount: number = 0; // Image count variable
   userEmail: string = ''; // Store the logged-in user's email
   subscriptionStatus: string = 'Unsubscribed'; // Track subscription status
+  maxImagesAllowed: number = 50; // Default maximum for unsubscribed users
 
   constructor(
     private router: Router,
@@ -23,12 +24,12 @@ export class MemoriesPage implements OnInit {
 
   ngOnInit() {
     // Retrieve the logged-in user's email (from localStorage)
-    this.userEmail = localStorage.getItem('email') || ''; // Retrieve from localStorage
+    this.userEmail = localStorage.getItem('email') || '';
 
     // If no email is found, redirect to the login page
     if (!this.userEmail) {
       console.error('No email found in localStorage.');
-      this.router.navigate(['/login']); // Redirect to login if no email
+      this.router.navigate(['/login']);
       return;
     }
 
@@ -37,13 +38,12 @@ export class MemoriesPage implements OnInit {
     this.loadSubscriptionStatus();
   }
 
-  // Function to navigate back to the Dashboard
-  navigateToDashboard() {
-    this.router.navigate(['/dashboard']);
-  }
-
-  // Function to open action sheet for image upload (only Gallery option)
   async uploadPicture() {
+    if (this.subscriptionStatus === 'Unsubscribed' && this.imageCount >= this.maxImagesAllowed) {
+      alert('You have reached the maximum limit of 50 images. Please subscribe for unlimited storage.');
+      return;
+    }
+
     const actionSheet = await this.actionSheetController.create({
       header: 'Choose an Image',
       buttons: [
@@ -62,7 +62,6 @@ export class MemoriesPage implements OnInit {
     await actionSheet.present();
   }
 
-  // Function to select an image from the gallery
   async selectImageFromGallery() {
     try {
       const photo = await Camera.getPhoto({
@@ -72,14 +71,12 @@ export class MemoriesPage implements OnInit {
         width: 800,
       });
 
-      // Upload the selected image to the server
       await this.uploadImage(photo);
     } catch (error) {
       console.error('Error selecting image from gallery:', error);
     }
   }
 
-  // Function to upload image to the backend
   async uploadImage(photo: any) {
     try {
       if (!this.userEmail) {
@@ -91,28 +88,23 @@ export class MemoriesPage implements OnInit {
       const imageFile = await fetch(photo.webPath);
       const imageBlob = await imageFile.blob();
 
-      // Append the image and metadata to FormData
       formData.append('image', imageBlob, 'image.jpg');
       formData.append('email', this.userEmail);
       formData.append('place', 'Uploaded from device gallery');
       formData.append('gpsCoordinates', 'Not available');
       formData.append('date', new Date().toISOString());
 
-      // Send the form data to the backend
       const response = await this.http
         .post('http://localhost:5000/api/upload', formData)
         .toPromise();
 
       console.log('Image uploaded successfully:', response);
-
-      // Fetch the updated memories after upload to display them
       this.loadMemories();
     } catch (error) {
       console.error('Error uploading image:', error);
     }
   }
 
-  // Function to load saved images from the backend (get all memories for the logged-in user)
   async loadMemories() {
     try {
       const response = await this.http
@@ -121,9 +113,9 @@ export class MemoriesPage implements OnInit {
 
       if (response && response.memories) {
         this.memoryImages = response.memories.map(
-          (memory: any) => memory.image // Extract base64 image string
+          (memory: any) => memory.image
         );
-        this.imageCount = this.memoryImages.length; // Update the image count
+        this.imageCount = this.memoryImages.length;
       } else {
         this.memoryImages = [];
         this.imageCount = 0;
@@ -133,25 +125,23 @@ export class MemoriesPage implements OnInit {
     }
   }
 
-  // Load subscription status (if any)
-  // Function to load subscription status (if any)
-async loadSubscriptionStatus() {
-  try {
-    const response = await this.http
-      .get<any>(`http://localhost:5000/api/users/${this.userEmail}`)
-      .toPromise();
-
-    console.log('Subscription response:', response);  // Debugging log
-
-    if (response && response.subscription) {
-      this.subscriptionStatus = response.subscription; // Update subscription status
-      console.log('Subscription status loaded:', this.subscriptionStatus); // Debugging log
-    } else {
-      console.warn('No subscription status found.');
-      this.subscriptionStatus = 'Unsubscribed'; // Default if no subscription status
+  async loadSubscriptionStatus() {
+    try {
+      const response = await this.http
+        .get<any>(`http://localhost:5000/api/users/${this.userEmail}`)
+        .toPromise();
+  
+      console.log('Full API response:', response); // Log full response
+  
+      if (response && response.subscription) {
+        this.subscriptionStatus = response.subscription;
+        console.log('Subscription status loaded:', this.subscriptionStatus);
+      } else {
+        console.warn('No subscription status found in response.');
+        this.subscriptionStatus = 'Unsubscribed'; // Default
+      }
+    } catch (error) {
+      console.error('Error fetching subscription status:', error);
     }
-  } catch (error) {
-    console.error('Error fetching subscription status:', error);
-  }
-}
+  }  
 }

@@ -1,11 +1,8 @@
 <ion-header>
   <ion-toolbar>
-    <!-- Back button that redirects to the dashboard -->
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/dashboard"></ion-back-button>
     </ion-buttons>
-
-    <!-- Title with the centered logo -->
     <ion-title class="ion-text-center">
       <img src="assets/logo2.png" alt="Logo" style="height: 30px;" />
     </ion-title>
@@ -13,30 +10,26 @@
 </ion-header>
 
 <ion-content>
-  <!-- Section: Memories Header -->
   <div class="memories-header">
     <h3>{{ 'MEMORIES.HEADER' | translate }}</h3>
 
-    <!-- Show the image count ONLY for unsubscribed users -->
-    <p *ngIf="subscriptionStatus !== 'Subscribed'">
-      <strong>{{ 'MEMORIES.COUNT' | translate }}:</strong> {{ imageCount }}/50
-    </p>
-
-    <!-- Show upgrade message if nearing upload limit and user is not subscribed -->
-    <p *ngIf="subscriptionStatus !== 'Subscribed' && imageCount >= 40" class="upgrade-message">
-      {{ 'MEMORIES.UPGRADE_MESSAGE' | translate }}
+    <!-- Show image count -->
+    <p>
+      <strong>{{ 'MEMORIES.COUNT' | translate }}:</strong>
+      <b>{{ imageCount }}/{{ subscriptionStatus === 'Subscribed'?'∞':maxImagesAllowed }}</b>
     </p>
   </div>
 
-  <!-- Section: User Pictures Grid -->
   <div class="memories-grid">
-    <!-- Upload Button -->
-    <ion-button class="add-picture" (click)="uploadPicture()">
+    <ion-button
+      class="add-picture"
+      (click)="uploadPicture()"
+      [disabled]="subscriptionStatus !== 'Subscribed' && imageCount >= maxImagesAllowed"
+    >
       <ion-icon name="add-circle-outline" style="font-size: 30px;"></ion-icon>
       {{ 'MEMORIES.ADD_IMAGE' | translate }}
     </ion-button>
 
-    <!-- Display each uploaded memory -->
     <div class="memory-picture" *ngFor="let image of memoryImages">
       <img [src]="image" alt="{{ 'MEMORIES.IMAGE_ALT' | translate }}" />
     </div>

@@ -126,7 +126,6 @@ app.post('/api/login', async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    console.log("someone tries to log...");
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
@@ -160,6 +159,7 @@ app.get('/api/users/:email', async (req, res) => {
       lastName: user.lastName,
       email: user.email,
       password: user.password, // If including password, ensure proper hashing and security measures are in place
+      subscription: user.subscription,
     });
   } catch (error) {
     console.error('Error fetching user:', error);
