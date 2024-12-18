@@ -24,7 +24,9 @@
     "ALL_FIELDS_REQUIRED": "Alle Felder sind erforderlich.",
     "SUCCESS_HEADER": "Erfolg",
     "SUCCESS_MESSAGE": "Ihr Konto wurde erfolgreich erstellt!",
-    "ERROR_MESSAGE": "Es gab einen Fehler bei der Kontoerstellung. Bitte versuchen Sie es erneut."
+    "ERROR_MESSAGE": "Es gab einen Fehler bei der Kontoerstellung. Bitte versuchen Sie es erneut.",
+    "INVALID_EMAIL": "Bitte geben Sie eine gültige E-Mail-Adresse ein: user@gmail.com.",
+    "INVALID_PASSWORD": "Das Passwort muss mindestens einen Großbuchstaben, eine Zahl und ein Sonderzeichen (z. B. @, $ usw.) enthalten."
   },
   "DASHBOARD": {
     "MENU": "Menü",

@@ -55,8 +55,8 @@ const memorySchema = new mongoose.Schema(
     email: { type: String, unique: true, required: true },
     memories: [
       {
-        image: { type: Buffer, required: true },  // Buffer to store image data directly in DB
-        mimeType: { type: String, required: true }, // MIME type of the image
+        image: { type: Buffer, required: true },  
+        mimeType: { type: String, required: true }, 
         place: { type: String, default: 'Unknown' },
         gpsCoordinates: { type: String, default: 'Not available' },
         date: { type: Date, default: Date.now },
@@ -73,7 +73,7 @@ const memorySchema = new mongoose.Schema(
 const Memory = mongoose.model('Memory', memorySchema);
 
 // Set up multer for image uploads (saving to memory, not disk)
-const storage = multer.memoryStorage();  // Store image in memory (no disk)
+const storage = multer.memoryStorage();  
 
 const upload = multer({
   storage: storage,

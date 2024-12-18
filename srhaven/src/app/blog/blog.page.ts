@@ -9,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class BlogPage implements OnInit {
   searchQuery: string = '';
   blogPosts: any[] = [
+  // Array of blog post objects, each with metadata (title, summary, image, & URL)
     {
       blog: 'Blog 1',
       title: 'Everything You Need to Know About Visiting Cologne Cathedral',
@@ -74,8 +75,11 @@ export class BlogPage implements OnInit {
       url: 'https://www.creativelena.com/en/travel-blog/unesco-travel-germany-erfurt-weimar-wartburg/',
     }
   ];
+  // Filtered blog posts, initially containing all posts
   filteredPosts = [...this.blogPosts];
 
+
+  // Retrieve saved language from localStorage
   constructor(private translate: TranslateService) {
     const savedLanguage = localStorage.getItem('appLanguage') || 'en';
     this.translate.use(savedLanguage);
@@ -83,10 +87,12 @@ export class BlogPage implements OnInit {
 
   ngOnInit() {}
 
+  // Open a blog post in a new browser tab
   openPost(url: string) {
     window.open(url, '_blank');
   }
 
+  // Filter blog posts based on the search query
   filterPosts() {
     const query = this.searchQuery.toLowerCase();
     this.filteredPosts = this.blogPosts.filter(post =>
@@ -94,6 +100,7 @@ export class BlogPage implements OnInit {
     );
   }
 
+  // Handle segment changes (Recent posts)
   onSegmentChange(event: any) {
     const filter = event.detail.value;
     if (filter === 'recent') {
@@ -106,6 +113,7 @@ export class BlogPage implements OnInit {
     }
   }
 
+  // Get the most recent blog posts, limited by a specified number
   getRecentPosts(limit: number) {
     return this.blogPosts
       .map(post => ({
@@ -117,6 +125,7 @@ export class BlogPage implements OnInit {
       .map(({ parsedDate, ...cleanPost }) => cleanPost);
   }
 
+  // Use the browser's speech synthesis API to read a blog post aloud
   readPost(title: string, blog: string, summary: string) {
     const speech = new SpeechSynthesisUtterance();
     speech.text = `${title}. ${blog}. ${summary}`;

@@ -11,9 +11,9 @@ import { Router } from '@angular/router';
 export class SubscriptionPage implements OnInit {
   userIBAN: string = '';
   description: string = '';
-  subscriptionAmount: number = 49; // Fixed subscription amount
-  srHavenIBAN: string = 'GB12 ABCD 102030 12345678'; // Example receiver IBAN
-  userEmail: string = ''; // Dynamically loaded email from localStorage
+  subscriptionAmount: number = 49; 
+  srHavenIBAN: string = 'GB12 ABCD 102030 12345678'; 
+  userEmail: string = ''; 
 
   constructor(
     private http: HttpClient,
@@ -45,9 +45,9 @@ export class SubscriptionPage implements OnInit {
 
     // Send POST request to the backend API
     this.http.post('http://localhost:5000/api/subscription', {
-      email: this.userEmail, // User's email fetched dynamically
-      userIBAN: this.userIBAN, // User's IBAN entered in the input
-      description: this.description || '', // Optional description field
+      email: this.userEmail, 
+      userIBAN: this.userIBAN, 
+      description: this.description || '',
     }).subscribe({
       next: async (response: any) => {
         // Display success toast

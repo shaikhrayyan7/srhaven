@@ -7,13 +7,13 @@ ion-content {
   }
 
   .custom-header {
-    --background: orange; /* Changes the background color */
-    color: white; /* Sets the text color to white for better contrast */
+    --background: orange; 
+    color: white; 
   }
   
   ion-toolbar {
-    --background: orange; /* Target toolbar specifically */
-    --color: white; /* Ensure the text/icon color is white */
+    --background: orange;
+    --color: white;
   }
   
 .memories-header {
@@ -28,7 +28,7 @@ ion-content {
   
   .memories-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 images per row */
+    grid-template-columns: repeat(3, 1fr); 
     gap: 5px;
     padding: 20px;
   }

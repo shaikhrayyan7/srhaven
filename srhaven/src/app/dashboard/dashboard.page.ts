@@ -6,12 +6,15 @@ import { TranslateService } from '@ngx-translate/core';
 import { Injectable } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 
+// Service to handle authentication logic
 @Injectable({
   providedIn: 'root',
 })
+
 export class AuthService {
+// Logout method to clear user session data
   logout() {
-    localStorage.removeItem('userToken'); // Clear the user token
+    localStorage.removeItem('userToken'); 
     sessionStorage.clear();
   }
 }
@@ -48,11 +51,13 @@ export class DashboardPage {
     this.translate.use(savedLanguage);
   }
 
+  // Lifecycle method triggered when the page is about to be displayed
   ionViewWillEnter() {
     console.log(this.translate.instant('DASHBOARD.WELCOME_MESSAGE'));
     this.initializeSpeechRecognition();
   }
 
+  // Open the camera to capture an image
   async openCamera() {
     if (this.platform.is('hybrid')) {
       try {
@@ -74,6 +79,7 @@ export class DashboardPage {
     }
   }
 
+  // Open the web camera for image capture
   openWebCamera() {
     console.log('Attempting to access webcam...');
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -96,7 +102,7 @@ export class DashboardPage {
     }
   }
   
-
+  // Capture an image from the web camera
   captureImageFromWebCamera() {
     const videoElement = document.querySelector('video') as HTMLVideoElement;
     if (videoElement) {
@@ -114,6 +120,7 @@ export class DashboardPage {
     }
   }
 
+  // Close the web camera
   closeCamera() {
     const videoElement = document.querySelector('video') as HTMLVideoElement;
     if (videoElement) {
@@ -124,10 +131,12 @@ export class DashboardPage {
     this.isWebCameraOpen = false;
   }
 
+  // Handle menu item clicks and navigate to the corresponding route
   onMenuItemClick(route: string) {
     this.router.navigate([route]);
   }
 
+  // Initialize speech recognition for voice commands
   initializeSpeechRecognition() {
     const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
     if (SpeechRecognition) {
@@ -140,10 +149,12 @@ export class DashboardPage {
     }
   }
 
+  // Start speech recognition
   startListening() {
     this.recognition?.start();
   }
 
+  // Handle voice commands and navigate based on recognized text
   handleSpeechCommand(command: string) {
     const matchedRoute = Object.keys(this.menuRoutes).find(label =>
       command.includes(label.toLowerCase())
@@ -153,11 +164,7 @@ export class DashboardPage {
     }
   }
 
-  // logout() {
-  //   this.authService.logout(); // Clear user session
-  //   this.router.navigate(['/login'], { state: { clearFields: true } }); // Pass state to clear fields
-  // }
-
+  // Confirm logout action with a dialog
   async confirmLogout() {
     const alert = await this.alertController.create({
       header: this.translate.instant('LOGOUT.CONFIRM_HEADER') || 'Confirm Logout',
@@ -177,7 +184,8 @@ export class DashboardPage {
     });
     await alert.present();
   }
-
+  
+  // Perform logout and redirect to the home page
   logout() {
     this.authService.logout(); // Clear user session
     this.router.navigateByUrl('/home', { skipLocationChange: true }).then(() => {

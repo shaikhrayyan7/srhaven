@@ -1,59 +1,53 @@
-/* Login Page Background */
 .login-page {
     --background: url('/assets/login.jpg') no-repeat center center/cover;
-    min-height: 100vh; /* Full viewport height */
+    min-height: 100vh; 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-/* Highlighted Logo Section */
 .logo-container {
     text-align: center;
-    margin: 3vh auto; /* Space from the top */
+    margin: 3vh auto; 
     position: relative;
-    padding: 20px; /* Add spacing around the logo */
-    background: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
-    border-radius: 12px; /* Rounded corners for a smooth look */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Shadow for emphasis */
-    z-index: 1; /* Ensure it is above the background */
+    padding: 20px; 
+    background: rgba(0, 0, 0, 0.6); 
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); 
+    z-index: 1; 
   }
   
-/* Logo image styling */
 .logo-container .logo {
-    height: 110px; /* Adjust logo height */
-    width: auto; /* Maintain aspect ratio */
-    max-height: 20vh; /* Restrict maximum height for responsiveness */
-    z-index: 2; /* Ensure the logo stays above the container styling */
+    height: 110px; 
+    width: auto; 
+    max-height: 20vh; 
+    z-index: 2; 
   }
 
-/* Form Container */
 .form-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 90%; /* Default width for smaller screens */
-    max-width: 400px; /* Maximum width for larger screens */
-    margin: 0 auto; /* Center the form horizontally */
-    padding: 20px; /* Add padding for inner spacing */
-    background: rgba(255, 255, 255, 0.8); /* Light background for readability */
-    border-radius: 10px; /* Rounded corners for modern design */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
-    min-height: 60%; /* Minimum height to maintain proportion */
+    width: 90%; 
+    max-width: 400px; 
+    margin: 0 auto;
+    padding: 20px; 
+    background: rgba(255, 255, 255, 0.8); 
+    border-radius: 10px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+    min-height: 60%; 
     z-index: 1;
 }
 
-/* Input Styling */
 ion-item {
-    --background: rgba(255, 255, 255, 0.7); /* Darker background for contrast */
+    --background: rgba(255, 255, 255, 0.7); 
     --border-radius: 8px;
-    margin-bottom: 15px; /* Adjust margin between inputs */
-    width: 100%; /* Ensure inputs take full width of form */
+    margin-bottom: 15px;
+    width: 100%; 
 }
 
-/* Sign-up Text */
 .signup-text {
     text-align: center;
     margin: 10px 0;
@@ -66,36 +60,33 @@ ion-item {
     text-decoration: underline;
 }
 
-/* Login Button */
 .login-button {
-    --background: rgba(251, 146, 8, 0.8); /* Custom color for login button */
+    --background: rgba(251, 146, 8, 0.8); 
     --color: #fff;
-    width: 100%; /* Make button width 100% of the form container */
-    font-weight: bold; /* Enhance button text */
+    width: 100%; 
+    font-weight: bold; 
 }
 
-/* Error Message */
 .error-message {
-    color: red; /* Emphasize error messages */
-    font-size: 14px; /* Adjust the size for readability */
-    margin-top: 10px; /* Add spacing above the message */
+    color: red;
+    font-size: 14px; 
+    margin-top: 10px; 
 }
 
-/* Media Queries for Responsiveness */
 @media (min-width: 1024px) {
     .form-container {
-        padding: 30px; /* Increase padding for desktops */
-        max-width: 500px; /* Wider form for larger screens */
+        padding: 30px; 
+        max-width: 500px; 
     }
 
     .logo {
-        height: 140px; /* Larger logo for bigger screens */
+        height: 140px; 
     }
 }
 
 @media (max-width: 768px) {
     .logo {
-        height: 100px; /* Adjust logo size for tablets */
+        height: 100px; 
     }
 
     .form-container {
@@ -119,24 +110,24 @@ ion-item {
 
 @media (max-width: 480px) {
     .logo {
-        height: 80px; /* Smaller logo for mobile screens */
+        height: 80px;
     }
 
     .login-button {
-        width: 90%; /* Slightly reduce button width */
+        width: 90%; 
     }
 
     .form-container {
-        margin: 15px; /* Reduce outer margin */
-        padding: 15px; /* Compact padding */
+        margin: 15px; 
+        padding: 15px; 
     }
 
     .signup-text {
-        font-size: 10px; /* Reduce text size for smaller screens */
+        font-size: 10px; 
     }
 
     .error-message {
-        color: black; /* Change text color to black */
-        font-size: 12px; /* Slightly smaller for compact view */
+        color: black; 
+        font-size: 12px; 
     }
 }

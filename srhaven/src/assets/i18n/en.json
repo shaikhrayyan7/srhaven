@@ -24,7 +24,9 @@
     "ALL_FIELDS_REQUIRED": "All fields are required.",
     "SUCCESS_HEADER": "Success",
     "SUCCESS_MESSAGE": "Your account has been created successfully!",
-    "ERROR_MESSAGE": "There was an error creating your account. Please try again."
+    "ERROR_MESSAGE": "There was an error creating your account. Please try again.",
+    "INVALID_EMAIL": "Please enter a valid email: user@gmail.com.",
+    "INVALID_PASSWORD": "Password must contain at least one capital letter, one number, and one special character (e.g., @, $, etc.)."
   },
     "DASHBOARD": {
       "MENU": "Menu",

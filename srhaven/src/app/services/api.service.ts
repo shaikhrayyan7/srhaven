@@ -40,10 +40,7 @@ export class ApiService {
     );
   }
 
-  /**
-   * Function to get all users
-   * @returns Observable of the users list
-   */
+  /* Function to get all users @returns Observable of the users list */
   getUsers(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/users`).pipe(
       catchError((error) => {

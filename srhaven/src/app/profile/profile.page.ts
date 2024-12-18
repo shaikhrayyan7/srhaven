@@ -32,6 +32,7 @@ export class ProfilePage implements OnInit {
   }
 
   ngOnInit() {
+    // Fetch user email from localStorage
     this.email = localStorage.getItem('email') || '';
     if (!this.email) {
       console.error('No email found in localStorage.');
@@ -41,6 +42,7 @@ export class ProfilePage implements OnInit {
     this.loadUserProfile();
   }
 
+  // Load user profile data from the backend
   loadUserProfile() {
     this.http.get(`http://localhost:5000/api/users/${this.email}`).subscribe({
       next: (response: any) => {
@@ -54,16 +56,19 @@ export class ProfilePage implements OnInit {
     });
   }
 
+  // Toggle password visibility between text and password
   togglePasswordVisibility() {
     this.passwordType = this.passwordType === 'password' ? 'text' : 'password';
   }
 
+  // Handle profile updates
   onUpdate() {
     if (!this.user.firstName || !this.user.lastName || !this.user.email) {
       this.showToast(this.translate.instant('PROFILE.ALL_FIELDS_REQUIRED'));
       return;
     }
 
+    // Prepare the payload for the update reques
     const updatePayload = {
       firstName: this.user.firstName,
       lastName: this.user.lastName,
@@ -71,18 +76,21 @@ export class ProfilePage implements OnInit {
       password: this.user.password || undefined,
     };
 
+    // Send the update request to the backend
     this.http.put(`http://localhost:5000/api/users/${this.email}`, updatePayload).subscribe({
       next: () => this.showToast(this.translate.instant('PROFILE.UPDATE_SUCCESS')),
       error: () => this.showToast(this.translate.instant('PROFILE.UPDATE_ERROR')),
     });
   }
 
+  // Prompt the user to confirm account deletion
   onDeleteAccount() {
     this.showToast(this.translate.instant('PROFILE.CONFIRM_DELETE'), true).then((toast) => {
       toast.onDidDismiss().then(() => this.deleteAccount());
     });
   }
 
+  // Delete the user account
   deleteAccount() {
     this.http.delete(`http://localhost:5000/api/users/${this.email}`).subscribe({
       next: () => {
@@ -94,13 +102,14 @@ export class ProfilePage implements OnInit {
     });
   }
 
+  // Show a toast notification
   async showToast(message: string, showConfirmButton: boolean = false) {
     const toast = await this.toastController.create({
       message: message,
       duration: showConfirmButton ? 0 : 4000,
       position: 'bottom',
       buttons: showConfirmButton
-        ? [{ text: this.translate.instant('PROFILE.CANCEL'), role: 'cancel' }]
+        ? [{ text: this.translate.instant('CONFIRM') }]
         : [],
     });
     toast.present();

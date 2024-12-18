@@ -1,6 +1,5 @@
-/* Responsive Background */
 ion-content {
-  --background: none; /* Remove the direct background */
+  --background: none;
   position: relative;
 }
 
@@ -12,87 +11,80 @@ ion-content::after {
   left: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.9; /* Adjust opacity for transparency */
-  z-index: -2; /* Place it behind content */
-  pointer-events: none; /* Ensure it doesn't interfere with clicks */
+  opacity: 0.9;
+  z-index: -2; 
+  pointer-events: none; 
 }
 
-/* Highlighted Logo Section */
 .logo-container {
   text-align: center;
-  margin: 16vh auto; /* Space from the top */
+  margin: 16vh auto; 
   position: relative;
-  padding: 20px; /* Add spacing around the logo */
-  background: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
-  border-radius: 12px; /* Rounded corners for a smooth look */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Shadow for emphasis */
-  z-index: 1; /* Ensure it is above the background */
+  padding: 20px; 
+  background: rgba(0, 0, 0, 0.6); 
+  border-radius: 12px; 
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  z-index: 1; 
 }
 
-/* Logo image styling */
 .logo-container .logo {
-  height: 110px; /* Adjust logo height */
-  width: auto; /* Maintain aspect ratio */
-  max-height: 20vh; /* Restrict maximum height for responsiveness */
-  z-index: 2; /* Ensure the logo stays above the container styling */
+  height: 110px; 
+  width: auto; 
+  max-height: 20vh; 
+  z-index: 2; 
 }
 
-
-/* Responsive Button Section */
 .button-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 6vh auto; /* Space from the logo */
+  margin: 6vh auto;
 }
 
 .action-button {
   margin: 10px 0;
-  width: 80%; /* Adjust width dynamically */
-  max-width: 400px; /* Limit button width for larger screens */
-  --background: rgba(251, 146, 8, 0.8); /* Semi-transparent orange */
+  width: 80%; 
+  max-width: 400px; 
+  --background: rgba(251, 146, 8, 0.8);
   --color: #fefefe;
 }
 
 .signup-button {
-  --background: rgba(251, 146, 8, 0.8); /* Custom color for Signup */
+  --background: rgba(251, 146, 8, 0.8);
 }
 
-/* Media Queries for Extra Responsiveness */
 @media (min-width: 768px) {
   .logo-container {
-    margin: 15vh auto; /* Push logo down slightly on larger screens */
+    margin: 15vh auto; 
   }
   .action-button {
-    width: 60%; /* Adjust button size for tablets */
+    width: 60%; 
   }
 }
 
 @media (min-width: 1024px) {
   .logo-container {
-    margin: 20vh auto; /* Adjust spacing for desktop */
+    margin: 20vh auto; 
   }
   .action-button {
-    width: 50%; /* Smaller button width for desktops */
+    width: 50%; 
   }
 }
 
-/* Language Dropdown with Highlighted Background */
 .language-dropdown {
   position: absolute;
   right: 16px;
   top: 16px;
   z-index: 10;
-  background: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
-  border-radius: 12px; /* Rounded corners */
-  padding: 8px 16px; /* Padding for better spacing */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Shadow for emphasis */
+  background: rgba(0, 0, 0, 0.6); 
+  border-radius: 12px; 
+  padding: 8px 16px; 
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); 
 }
 
-/* Style the language select dropdown */
 .language-select {
-  --placeholder-color: white; /* Placeholder text color */
-  --color: white; /* Selected text color */
-  font-weight: bold; /* Bold text */
-  font-size: 16px; /* Font size for better readability */
+  --placeholder-color: white; 
+  --color: white; 
+  font-weight: bold; 
+  font-size: 16px; 
 }

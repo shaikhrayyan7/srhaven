@@ -7,22 +7,21 @@ ion-content {
   }
 
   .custom-header {
-    --background: #e89c0c; /* Header background color */
-    --color: white; /* Optional: Text and icon color */
+    --background: #e89c0c;
+    --color: white; 
   }
   
   ion-toolbar {
-    --background: #e89c0c; /* Toolbar background color */
-    --color: white; /* Optional: Ensures text/icons remain visible */
+    --background: #e89c0c;
+    --color: white; 
   }
 
   p {
-    color: #ffffff !important; /* White text */
-    font-size: 3rem; /* Adjust font size */
-    text-align: center; /* Center align all <p> tags */
+    color: #ffffff !important;
+    font-size: 3rem;
+    text-align: center;
   }
   
-  /* Profile Page Styling */
   .profile-container {
     display: flex;
     flex-direction: column;
@@ -42,13 +41,12 @@ ion-content {
   }
   
   .profile-heading {
-    font-size: 2rem; /* Default font size for larger screens */
+    font-size: 2rem; 
     font-weight: bold;
     text-align: center;
     margin-bottom: 20px;
   }
   
-  /* Styling for the form */
   ion-item {
     margin-bottom: 20px;
   }
@@ -66,7 +64,6 @@ ion-content {
     gap: 10px;
   }
   
-  /* Responsiveness for smaller screens */
   @media (max-width: 768px) {
     .profile-container {
       padding: 10px;
@@ -78,7 +75,7 @@ ion-content {
     }
   
     .profile-heading {
-      font-size: 1.5rem; /* Slightly smaller text on tablet-sized screens */
+      font-size: 1.5rem; 
     }
   }
   
@@ -93,7 +90,7 @@ ion-content {
     }
   
     .profile-heading {
-      font-size: 1.2rem; /* Smaller text for very small screens (phones) */
+      font-size: 1.2rem; 
     }
   }
   

@@ -26,6 +26,7 @@ export class CreateMemoryPage {
   ) {}
 
   ionViewWillEnter() {
+    // Fetch user email from local storage
     this.userEmail = localStorage.getItem('email');
     console.log('User Email:', this.userEmail);
 
@@ -43,6 +44,7 @@ export class CreateMemoryPage {
         this.date = params['date'];
       }
 
+      // Fetch GPS coordinates and reverse geocode them to get the location
       try {
         const coordinates = await Geolocation.getCurrentPosition();
         this.gpsCoordinates = `Latitude: ${coordinates.coords.latitude}, Longitude: ${coordinates.coords.longitude}`;
@@ -60,6 +62,7 @@ export class CreateMemoryPage {
     });
   }
 
+  // Capture an image using the device camera
   async captureImage() {
     try {
       const image = await Camera.getPhoto({
@@ -77,7 +80,7 @@ export class CreateMemoryPage {
       await this.showToast('Failed to capture image. Please try again.');
     }
   }
-
+  // Save the memory by sending data to the backend
   async saveMemory() {
     if (!this.userEmail) {
       console.error('User email is not available. Cannot save memory.');
@@ -94,13 +97,13 @@ export class CreateMemoryPage {
       const blob = await response.blob();
   
       // Append the Blob and other form data
-      formData.append('image', blob, 'memory.jpg'); // 'memory.jpg' is the file name
+      formData.append('image', blob, 'memory.jpg'); 
       formData.append('email', this.userEmail);
       formData.append('place', this.place);
       formData.append('date', this.date);
       formData.append('gpsCoordinates', this.gpsCoordinates);
   
-      // Send the multipart request
+      // Send the data to the backend API
       await this.http.post('http://localhost:5000/api/upload', formData).toPromise();
       console.log('Memory saved successfully.');
       this.router.navigate(['/memories']);
@@ -109,7 +112,7 @@ export class CreateMemoryPage {
       await this.showToast('Failed to save memory. Please try again.');
     }
   }
-
+  // Reverse geocode coordinates to fetch the location name
   async getPlaceFromCoordinates(latitude: number, longitude: number): Promise<string> {
     try {
       const apiKey = 'ba5753827b0049f1b98f85397a334605';
@@ -128,6 +131,7 @@ export class CreateMemoryPage {
     }
   }
 
+  // Compress a base64 image to reduce its size
   async compressImage(imageBase64: string): Promise<string> {
     const img = new Image();
     img.src = imageBase64;
@@ -160,11 +164,13 @@ export class CreateMemoryPage {
     });
   }
 
+  // Calculate the size of a base64 image in KB
   getImageSize(base64String: string): string {
     const size = (base64String.length * 3) / 4 - (base64String.indexOf('=') > 0 ? base64String.split('=').length - 1 : 0);
     return `${(size / 1024).toFixed(2)} KB`;
   }
-
+  
+  // Show a toast message to the user
   async showToast(message: string) {
     const toast = await this.toastController.create({
       message: message,

@@ -6,6 +6,7 @@
   </ion-header>
   <ion-content>
 
+    <!-- Menu content -->
     <ion-item (click)="onMenuItemClick('/memories')">
       <ion-label>{{ 'DASHBOARD.MEMORIES' | translate }}</ion-label>
     </ion-item>
@@ -32,14 +33,12 @@
 
     <ion-item (click)="confirmLogout()">
       <ion-label>{{ 'DASHBOARD.LOGOUT' | translate }}</ion-label>
-      <!-- <ion-icon slot="start" name="log-out-outline"></ion-icon> -->
     </ion-item>
     
   </ion-content>
+
 </ion-menu>
-
 <ion-router-outlet id="main-content"></ion-router-outlet>
-
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
@@ -55,16 +54,19 @@
 
 <ion-content>
   <div class="dashboard-header">
+    <!-- Dashboard header with welcome message -->
     <h1>{{ 'DASHBOARD.WELCOME' | translate }}</h1>
     <p>{{ 'DASHBOARD.DESCRIPTION' | translate }}</p>
   </div>
 
+  <!-- Button for starting speech recognition -->
   <div class="speech-container">
     <ion-button id="start-speech" (click)="startListening()">
       <ion-icon name="volume-high-outline"></ion-icon>
     </ion-button>
   </div>
 
+  <!-- Button for opening the camera to create a memory -->
   <div class="memory-container">
     <ion-button (click)="openCamera()">
       {{ 'DASHBOARD.CREATE_MEMORY' | translate }}

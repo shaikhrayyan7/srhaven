@@ -24,6 +24,7 @@ export class MemoriesPage implements OnInit {
   ) {}
 
   ngOnInit() {
+    // Fetch user email from localStorage
     this.userEmail = localStorage.getItem('email') || '';
 
     if (!this.userEmail) {
@@ -35,11 +36,12 @@ export class MemoriesPage implements OnInit {
     this.loadMemories();
     this.loadSubscriptionStatus();
   }
-
+  // Navigate to the dashboard page 
   navigateToDashboard() {
     this.router.navigate(['/dashboard']);
   }
 
+  // Display an action sheet for selecting image upload options
   async uploadPicture() {
     const actionSheet = await this.actionSheetController.create({
       header: 'Choose an Image',
@@ -59,6 +61,7 @@ export class MemoriesPage implements OnInit {
     await actionSheet.present();
   }
 
+  // Handle image selection from the device gallery
   async selectImageFromGallery() {
     try {
       const photo = await Camera.getPhoto({
@@ -74,6 +77,7 @@ export class MemoriesPage implements OnInit {
     }
   }
 
+  // Upload the selected image to the server
   async uploadImage(photo: any) {
     try {
       if (!this.userEmail) {
@@ -85,12 +89,14 @@ export class MemoriesPage implements OnInit {
       const imageFile = await fetch(photo.webPath);
       const imageBlob = await imageFile.blob();
 
+      // Append image and metadata to FormData
       formData.append('image', imageBlob, 'image.jpg');
       formData.append('email', this.userEmail);
       formData.append('place', 'Uploaded from device gallery');
       formData.append('gpsCoordinates', 'Not available');
       formData.append('date', new Date().toISOString());
 
+      // Send the image to the backend
       const response = await this.http
         .post('http://localhost:5000/api/upload', formData)
         .toPromise();
@@ -103,6 +109,7 @@ export class MemoriesPage implements OnInit {
     }
   }
 
+  // Fetch the user's uploaded memories from the serve
   async loadMemories() {
     try {
       const response = await this.http
@@ -124,6 +131,7 @@ export class MemoriesPage implements OnInit {
     }
   }
 
+  // Fetch the user's subscription status from the server
   async loadSubscriptionStatus() {
     try {
       const response = await this.http
@@ -144,12 +152,14 @@ export class MemoriesPage implements OnInit {
     }
   }
 
+  // Check if the user is nearing the image upload limit
   checkImageLimit() {
     if (this.subscriptionStatus === 'Unsubscribed' && this.imageCount >= 40) {
       this.showSubscriptionReminder();
     }
   }
-
+  
+  // Display an alert reminding the user to upgrade their subscription
   async showSubscriptionReminder() {
     const alert = await this.alertController.create({
       header: 'Storage Limit Approaching',

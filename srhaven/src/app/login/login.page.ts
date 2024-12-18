@@ -12,13 +12,14 @@ export class LoginPage {
   email: string = '';
   password: string = '';
   showPassword: boolean = false;
-  errorMessage: string = ''; // To store error message if any
+  errorMessage: string = '';
 
   constructor(
     private http: HttpClient,
     private router: Router,
     private translate: TranslateService
   ) {
+
     // Retrieve and set the stored language
     const savedLanguage = localStorage.getItem('appLanguage') || 'en';
     this.translate.use(savedLanguage);

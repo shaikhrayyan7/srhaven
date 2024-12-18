@@ -27,10 +27,14 @@
 
       <!-- Password Input -->
       <ion-item>
-        <ion-label position="floating">{{ 'SIGNUP.PASSWORD' | translate }}</ion-label>
+        <ion-label position="floating">{{ 'LOGIN.PASSWORD' | translate }}</ion-label>
         <ion-input [(ngModel)]="password" 
-                   name="password" 
-                   [type]="showPassword ? 'text' : 'password'" required>
+                   [type]="showPassword ? 'text' : 'password'" 
+                   name="password" required>
+          <ion-icon slot="end" 
+                    [name]="showPassword ? 'eye-off' : 'eye'" 
+                    (click)="showPassword = !showPassword">
+          </ion-icon>
         </ion-input>
       </ion-item>
 
