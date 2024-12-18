@@ -14,31 +14,33 @@
 
 <ion-content class="ion-padding">
   <div class="subscription-card">
-    <h4><b>To get unlimited memories space. Get subscription for 49€!</b></h4>
+    <h4><b>To get unlimited memories space, subscribe now for 49€!</b></h4>
 
+    <!-- IBAN Input -->
     <ion-item>
-      <ion-label position="floating">Description:</ion-label>
-      <ion-input [(ngModel)]="description"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating">Enter IBAN:</ion-label>
+      <ion-label position="floating">Enter Your IBAN:</ion-label>
       <ion-input [(ngModel)]="userIBAN"></ion-input>
     </ion-item>
 
-    <!-- Flex Container for Amount and SRHaven IBAN -->
-    <div class="flex-container">
-      <ion-item class="flex-item">
-        <ion-label>Amount (€):</ion-label>
+    <!-- Description Input -->
+    <ion-item>
+      <ion-label position="floating">Description (Optional):</ion-label>
+      <ion-input [(ngModel)]="description"></ion-input>
+    </ion-item>
+
+    <!-- Subscription Details -->
+    <div class="subscription-details">
+      <ion-item>
+        <ion-label>Amount(€):</ion-label>
         <ion-input [value]="subscriptionAmount" disabled></ion-input>
       </ion-item>
-
-      <ion-item class="flex-item">
+      <ion-item>
         <ion-label>SRHaven IBAN:</ion-label>
         <ion-input [value]="srHavenIBAN" disabled></ion-input>
       </ion-item>
     </div>
 
+    <!-- Pay Button -->
     <div class="pay-button">
       <ion-button expand="block" color="success" (click)="paySubscription()">
         PAY

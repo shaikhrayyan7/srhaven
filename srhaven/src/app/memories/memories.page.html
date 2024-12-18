@@ -13,26 +13,32 @@
 </ion-header>
 
 <ion-content>
-  <!-- Section: Your Memories, Safely Stored -->
+  <!-- Section: Memories Header -->
   <div class="memories-header">
     <h3>{{ 'MEMORIES.HEADER' | translate }}</h3>
+
+    <!-- Show the image count ONLY for unsubscribed users -->
+    <p *ngIf="subscriptionStatus !== 'Subscribed'">
+      <strong>{{ 'MEMORIES.COUNT' | translate }}:</strong> {{ imageCount }}/50
+    </p>
+
+    <!-- Show upgrade message if nearing upload limit and user is not subscribed -->
+    <p *ngIf="subscriptionStatus !== 'Subscribed' && imageCount >= 40" class="upgrade-message">
+      {{ 'MEMORIES.UPGRADE_MESSAGE' | translate }}
+    </p>
   </div>
 
-  <!-- Section: User Pictures -->
+  <!-- Section: User Pictures Grid -->
   <div class="memories-grid">
-    <!-- First Image Slot for Upload Button -->
+    <!-- Upload Button -->
     <ion-button class="add-picture" (click)="uploadPicture()">
       <ion-icon name="add-circle-outline" style="font-size: 30px;"></ion-icon>
       {{ 'MEMORIES.ADD_IMAGE' | translate }}
     </ion-button>
 
-    <!-- Loop through the memoryImages array and display each image -->
+    <!-- Display each uploaded memory -->
     <div class="memory-picture" *ngFor="let image of memoryImages">
       <img [src]="image" alt="{{ 'MEMORIES.IMAGE_ALT' | translate }}" />
     </div>
   </div>
 </ion-content>
-
-
-
-

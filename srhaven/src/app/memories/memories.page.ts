@@ -11,7 +11,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class MemoriesPage implements OnInit {
   memoryImages: string[] = []; // Array to hold images displayed in the UI
+  imageCount: number = 0; // Image count variable
   userEmail: string = ''; // Store the logged-in user's email
+  subscriptionStatus: string = 'Unsubscribed'; // Track subscription status
 
   constructor(
     private router: Router,
@@ -22,7 +24,6 @@ export class MemoriesPage implements OnInit {
   ngOnInit() {
     // Retrieve the logged-in user's email (from localStorage)
     this.userEmail = localStorage.getItem('email') || ''; // Retrieve from localStorage
-    console.log('Retrieved userEmail from localStorage:', this.userEmail); // Debugging log
 
     // If no email is found, redirect to the login page
     if (!this.userEmail) {
@@ -31,8 +32,9 @@ export class MemoriesPage implements OnInit {
       return;
     }
 
-    // Load memories from the backend
+    // Load memories and check subscription status
     this.loadMemories();
+    this.loadSubscriptionStatus();
   }
 
   // Function to navigate back to the Dashboard
@@ -80,32 +82,21 @@ export class MemoriesPage implements OnInit {
   // Function to upload image to the backend
   async uploadImage(photo: any) {
     try {
-      // Ensure the email is available
       if (!this.userEmail) {
         console.error('Error: userEmail is missing or empty');
-        return; // Stop if email is missing
+        return;
       }
 
       const formData = new FormData();
-
-      // Fetch the image file from the URI and convert it into a Blob
       const imageFile = await fetch(photo.webPath);
       const imageBlob = await imageFile.blob();
 
-      // Log email and metadata for debugging
-      console.log('Uploading image with email:', this.userEmail);
-
       // Append the image and metadata to FormData
       formData.append('image', imageBlob, 'image.jpg');
-      formData.append('email', this.userEmail); // Send the user's email
-      formData.append('place', 'Uploaded from device gallery'); // Default value for place
-      formData.append('gpsCoordinates', 'Not available'); // Default value for GPS coordinates
-      formData.append('date', new Date().toISOString()); // Send the current date as the date of upload
-
-      // Debugging: Log FormData content
-      formData.forEach((value, key) => {
-        console.log(`FormData: ${key} = ${value}`);
-      });
+      formData.append('email', this.userEmail);
+      formData.append('place', 'Uploaded from device gallery');
+      formData.append('gpsCoordinates', 'Not available');
+      formData.append('date', new Date().toISOString());
 
       // Send the form data to the backend
       const response = await this.http
@@ -124,22 +115,43 @@ export class MemoriesPage implements OnInit {
   // Function to load saved images from the backend (get all memories for the logged-in user)
   async loadMemories() {
     try {
-      // Send a GET request to the backend to fetch images for the logged-in user
       const response = await this.http
         .get<any>(`http://localhost:5000/api/memories/${this.userEmail}`)
         .toPromise();
 
-      // Process the response and update memoryImages array
       if (response && response.memories) {
         this.memoryImages = response.memories.map(
           (memory: any) => memory.image // Extract base64 image string
         );
+        this.imageCount = this.memoryImages.length; // Update the image count
       } else {
-        console.warn('No memories found for the user.');
         this.memoryImages = [];
+        this.imageCount = 0;
       }
     } catch (error) {
       console.error('Error fetching memories:', error);
     }
   }
+
+  // Load subscription status (if any)
+  // Function to load subscription status (if any)
+async loadSubscriptionStatus() {
+  try {
+    const response = await this.http
+      .get<any>(`http://localhost:5000/api/users/${this.userEmail}`)
+      .toPromise();
+
+    console.log('Subscription response:', response);  // Debugging log
+
+    if (response && response.subscription) {
+      this.subscriptionStatus = response.subscription; // Update subscription status
+      console.log('Subscription status loaded:', this.subscriptionStatus); // Debugging log
+    } else {
+      console.warn('No subscription status found.');
+      this.subscriptionStatus = 'Unsubscribed'; // Default if no subscription status
+    }
+  } catch (error) {
+    console.error('Error fetching subscription status:', error);
+  }
+}
 }

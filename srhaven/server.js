@@ -10,13 +10,17 @@ const path = require('path');
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(bodyParser.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Serve uploaded files
 
 // Connect to MongoDB
 mongoose
-  .connect('mongodb://localhost/srhaven', {
+  .connect('mongodb://0.0.0.0:27017/srhaven', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -34,6 +38,7 @@ const userSchema = new mongoose.Schema(
     lastName: String,
     email: { type: String, unique: true },
     password: String,
+    subscription: { type: String, default: 'Unsubscribed' },
   },
   {
     timestamps: true,
@@ -121,6 +126,7 @@ app.post('/api/login', async (req, res) => {
   const { email, password } = req.body;
 
   try {
+    console.log("someone tries to log...");
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
@@ -266,8 +272,37 @@ app.get('/api/memories/:email', async (req, res) => {
   }
 });
 
+// Subscription API (One-time Payment Logic)
+app.post('/api/subscription', async (req, res) => {
+  try {
+    const { email, userIBAN, description } = req.body;
+
+    if (!email || !userIBAN) {
+      return res.status(400).json({ message: 'Email and IBAN are required.' });
+    }
+
+    // Find the user by email
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found.' });
+    }
+
+    // Update the user's subscription status to "Subscribed"
+    user.subscription = 'Subscribed';
+    await user.save();
+
+    res.status(200).json({
+      message: 'Payment successful! Subscription activated.',
+      subscriptionStatus: 'Subscribed',
+    });
+  } catch (error) {
+    console.error('Error processing subscription:', error);
+    res.status(500).json({ message: 'Internal server error.' });
+  }
+});
+
 // Start the server
 const PORT = 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Server running on http://0.0.0.0:${PORT}`);
 });

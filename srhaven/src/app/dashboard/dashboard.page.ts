@@ -33,6 +33,7 @@ export class DashboardPage {
     'PROFILE': '/profile',
     'BLOG': '/blog',
     'ABOUT': '/about',
+    'SUBSCRIPTION': '/subscription',
   };
 
   constructor(
